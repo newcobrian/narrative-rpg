@@ -77,88 +77,21 @@ function generateMockResponse(gmInput) {
  * @param {GMInput} gmInput - The structured input for the AI GM
  * @returns {Promise<GMOutput>} - The validated GM response
  */
-export async function callAIGM(gmInput) {
-  const envApiKey = import.meta.env.VITE_OPENAI_API_KEY;
-  const envModel = import.meta.env.VITE_OPENAI_MODEL || 'gpt-4o-mini';
-  const envUseMock = import.meta.env.VITE_USE_MOCK_GM === 'true';
-  const useMock = (gmInput.config?.use_mock ?? envUseMock) || !envApiKey;
-
-  console.log('🔍 AI GM Debug:', {
-    hasApiKey: !!envApiKey,
-    apiKeyLength: envApiKey?.length || 0,
-    useMock,
-    model: envModel
+export async function callAIGM(input) {
+  const response = await fetch("/api/gm", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
   });
 
-  if (useMock) {
-    console.log('📝 Returning mocked GM output');
-    const mockResponse = generateMockResponse(gmInput);
-    // Validate mock response too
-    try {
-      return validateGMOutput(mockResponse);
-    } catch (error) {
-      console.warn('⚠️ Mock response validation failed:', error);
-      return mockResponse; // Return anyway for development
-    }
+  if (!response.ok) {
+    console.error("GM API error", response.status);
+    throw new Error("GM API error: " + response.status);
   }
 
-  console.log('🤖 Calling OpenAI API...');
-  try {
-    const { default: OpenAI } = await import('openai');
-    const openai = new OpenAI({
-      apiKey: envApiKey,
-      dangerouslyAllowBrowser: true
-    });
+  const gmOutput = await response.json();
 
-    const systemPrompt = getSystemPrompt();
-    const userContent = JSON.stringify(gmInput, null, 2);
-
-    const response = await openai.chat.completions.create({
-      model: envModel,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userContent }
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.2
-    });
-
-    const content = response.choices[0].message.content;
-    let parsed;
-    try {
-      parsed = JSON.parse(content);
-    } catch (error) {
-      console.error('❌ Failed to parse GM response as JSON', error);
-      throw error;
-    }
-
-    // Validate the parsed response
-    try {
-      const validated = validateGMOutput(parsed);
-      return validated;
-    } catch (validationError) {
-      console.error('❌ GM response validation failed:', validationError);
-      console.error('Raw response:', parsed);
-      
-      // Fallback: ensure at least narration exists
-      if (!parsed.narration) {
-        parsed.narration = 'The Game Master seems unsure. Try your action again.';
-      }
-      if (!Array.isArray(parsed.suggested_actions)) {
-        parsed.suggested_actions = [];
-      }
-      if (typeof parsed.encounter_complete !== 'boolean') {
-        parsed.encounter_complete = false;
-      }
-      if (typeof parsed.location_complete !== 'boolean') {
-        parsed.location_complete = false;
-      }
-      
-      // Return a partially valid response with warnings
-      return parsed;
-    }
-  } catch (error) {
-    console.error('❌ OpenAI GM call failed:', error);
-    return generateMockResponse(gmInput);
-  }
+  // still use your existing validator to be safe
+  const validated = validateGMOutput(gmOutput);
+  return validated;
 }
