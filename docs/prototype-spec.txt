@@ -1,0 +1,203 @@
+NarrativeRPG — Prototype Spec (v0)
+Version: v0.1
+This document defines the full specification for the Phase 1 and Phase 2 prototype of NarrativeRPG — a web-based, AI-driven RPG playable through a chat-style UI.
+
+⭐ 1. Prototype Goals
+Primary Goals (Phase 1)
+	•	Validate the core gameplay loop: 
+	•	Character creation → 
+	•	Start a Location → 
+	•	Play through 1–3 Encounters via AI GM → 
+	•	Complete session. 
+	•	Ensure the AI GM reliably: 
+	•	Understands player actions 
+	•	Generates coherent narration 
+	•	Uses stats + rolls correctly 
+	•	Updates state consistently 
+	•	Assess the fun factor, pacing, and clarity. 
+Secondary Goals (Phase 2)
+	•	Persistent character saved locally. 
+	•	Ability to replay the demo Location while keeping: 
+	•	Player class, race, background 
+	•	Player inventory 
+	•	Player abilities 
+	•	Optional: XP/gold accumulation (simple, level remains 1 for now) 
+
+⭐ 2. Platform & Tech
+	•	Prototype Platform: Web 
+	•	Frontend: React 
+	•	State Management: React state or Zustand 
+	•	Persistence: LocalStorage (Phase 2) 
+	•	Backend: None (direct OpenAI calls from FE) 
+	•	LLM: GPT-series, using structured JSON output 
+	•	UI Style: Chat-style 
+
+⭐ 3. Feature Scope
+Phase 1 (Minimal Playable Loop)
+Included:
+	•	Character Creation 
+	•	One hardcoded Location (goblin_cave_001) 
+	•	Encounter flow (1–3 encounters) 
+	•	Chat-style interface for: 
+	•	Narration 
+	•	Player free-form actions 
+	•	GM-suggested actions 
+	•	Ability buttons (pulled from PlayerState) 
+	•	Minimal status displays: 
+	•	Player HP + effects 
+	•	Enemy HP + effects 
+	•	Current objectives 
+	•	LLM call pipeline 
+	•	Location completion summary screen 
+Not Included:
+	•	XP leveling 
+	•	Multiple Locations 
+	•	Saved character 
+	•	Items usable in mid-combat 
+	•	Cosmetics UI 
+	•	Inventory interactions 
+Phase 2 (Persistent Character)
+Adds:
+	•	Save PlayerState to localStorage 
+	•	“Continue as [Name]” on Start Screen 
+	•	Persistent inventory 
+	•	Persistent gold 
+	•	Persistent simple XP (level stays 1 for prototype) 
+	•	Ability to replay Goblin Cave while keeping progress 
+
+⭐ 4. Screens & User Flow
+Screen 1: Start Screen
+Elements:
+	•	Game title 
+	•	Play Demo (if no save exists) 
+	•	Continue as [Name] (if saved PlayerState exists) 
+	•	Small subtitle: “Prototype v0” 
+Flow:
+	•	First-time user → Character Creation 
+	•	Returning user → Direct to Location Intro 
+
+Screen 2: Character Creation
+Steps:
+	•	Choose Race (from GDD list) 
+	•	Choose Class (6 classes) 
+	•	Choose Background 
+	•	Choose 2 of 4 Starter Abilities (based on class) 
+	•	Enter Name 
+	•	Confirm → Generates PlayerState with base stats 
+Data saved:
+	•	PlayerState (Phase 1: in-memory, Phase 2: localStorage) 
+
+Screen 3: Location Intro
+Shows:
+	•	Location name: “Goblin Cave” 
+	•	Region: Emerald Woods 
+	•	Description 
+	•	Recommended Level: 1 
+	•	Begin Adventure button 
+Flow:
+	•	Clicking begins Encounter 1 
+
+Screen 4: Encounter Screen (Chat-style Core Loop)
+This is the main gameplay screen.
+Layout:
+	•	Narration Window (scrollable chat feed) 
+	•	Player Input Box for freeform actions 
+	•	Suggested Actions (buttons from GM output) 
+	•	Ability Buttons (mapped to PlayerState.abilities) 
+	•	Player Panel (HP, status) 
+	•	Enemy Panel (each enemy: HP + status) 
+	•	Objective Panel (current objectives + completion state) 
+	•	Next button appears when the GM indicates the turn is complete 
+Flow per Turn:
+	•	Narration appears 
+	•	Player chooses: 
+	•	Freeform text OR 
+	•	Ability button OR 
+	•	Suggested action 
+	•	FE constructs GM input JSON 
+	•	LLM returns JSON with: 
+	•	Narration 
+	•	Rolls 
+	•	PlayerState changes 
+	•	EnemyState changes 
+	•	EncounterState changes 
+	•	Suggested next actions 
+	•	FE updates state, appends narration to chat 
+	•	If GM marks encounter_complete, FE transitions to next Encounter 
+	•	If GM marks location_complete, FE shows Completion Screen 
+
+Screen 5: Location Complete
+Shows:
+	•	Completion narration (generated) 
+	•	Rewards: 
+	•	XP 
+	•	Gold 
+	•	Items 
+	•	Buttons: 
+	•	Play Again (Same Character) — Phase 2 only 
+	•	Restart — Phase 1 
+	•	Return to Start 
+
+⭐ 5. Data and State Models (From TDD)
+Required:
+	•	PlayerState 
+	•	EncounterState 
+	•	LocationState 
+	•	Test Location JSON 
+All data types use the exact structure from the TDD.
+
+⭐ 6. LLM Integration
+Input to GM:
+	•	Location JSON 
+	•	Current Encounter JSON 
+	•	PlayerState 
+	•	EncounterState 
+	•	History 
+	•	Player action 
+Output from GM:
+	•	Narration 
+	•	Rolls 
+	•	State changes 
+	•	Suggested next actions 
+	•	Encounter/Location completion 
+The FE applies these by updating local state.
+
+⭐ 7. Test Data Files
+For the prototype you will need:
+	•	location_goblin_cave.json 
+	•	classes.json 
+	•	races.json 
+	•	backgrounds.json 
+	•	abilities.json 
+Each simplified for v0.
+
+⭐ 8. Success Criteria
+Phase 1 Success:
+	•	Full playthrough of Goblin Cave possible 
+	•	GM consistently produces valid JSON 
+	•	State updates correctly 
+	•	No contradictions or broken encounters 
+	•	Core loop is fun enough to share with friends 
+Phase 2 Success:
+	•	PlayerState persists 
+	•	Player can replay Goblin Cave with same character 
+	•	Items/gold accumulate 
+
+⭐ 9. Stretch Goals (Optional)
+	•	Enemy icons 
+	•	Animated message transitions 
+	•	Sound effects 
+	•	Ability cooldown indicators 
+	•	“Show rolls” toggle for transparency 
+	•	Minimal character avatar display 
+
+⭐ 10. Summary
+This Prototype Spec defines:
+	•	Phase 1 core loop (no persistence) 
+	•	Phase 2 persistent character (localStorage) 
+	•	Chat-style UI design 
+	•	Single test Location flow 
+	•	Required data structures 
+	•	Exact GM contract for input/output 
+This is the complete blueprint for building the playable prototype of NarrativeRPG.
+

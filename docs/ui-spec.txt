@@ -1,0 +1,200 @@
+⭐ 
+NARRATIVERPG — UI SPEC (Prototype v0)
+This UI spec describes all screens, core components, layout structure, and interactions required to build the v0 demo.
+The goal is to be minimal, clear, and Cursor-friendly, with no unnecessary styling complexity.
+
+⭐ 1. 
+SCREEN LIST
+	•	Start Screen 
+	•	Character Creation Screen 
+	•	Game Screen (Chat Gameplay) 
+	•	Location Complete Screen 
+These are the only screens for Phase 1.
+
+⭐ 2. 
+GLOBAL UI PRINCIPLES
+	•	Minimal, clean UI 
+	•	Light styling (Tailwind recommended) 
+	•	Desktop-first layout 
+	•	No animations needed in v0 
+	•	Chat window scrolls automatically 
+	•	Use clickable buttons alongside a free text input 
+	•	Layout should remain readable even with long-form LLM text 
+	•	Status panels should remain small and simple 
+
+⭐ 3. 
+SCREEN SPECS
+
+🟦 
+Screen 1: Start Screen
+Layout
+Centered column layout:
+	•	Game Title: NarrativeRPG 
+	•	Subtitle: AI-Powered Fantasy RPG Prototype 
+	•	Primary button: “Play Demo” 
+	•	Secondary button: “Continue Character” (only enabled if localStorage contains a character; greyed out in Phase 1) 
+	•	Footer: Version tag (v0 prototype) 
+Logic
+	•	“Play Demo” → Go to Character Creation 
+	•	“Continue Character” → Go to Game Screen (Phase 2 only) 
+
+🟦 
+Screen 2: Character Creation Screen
+Layout
+Vertical scrollable form:
+	•	Race Selection 
+	•	Use dropdown or list of buttons (one column). 
+	•	Class Selection 
+	•	Same pattern as above. 
+	•	Starter Abilities (Choose 2 of 4) 
+	•	Show 4 ability cards with name + short description 
+	•	Each card selectable (with checkmark when active) 
+	•	Name Field 
+	•	Text input 
+	•	Confirm Button (disabled until valid) 
+Logic
+	•	When confirmed: 
+	•	Construct PlayerState per TDD 
+	•	Save in memory (Phase 1) 
+	•	Navigate to Game Screen, load Location intro 
+
+🟦 
+Screen 3: Game Screen (Chat Gameplay)
+This is the core gameplay screen.
+Layout Structure (3-Column Flex Layout)
+--------------------------------------------------------
+| Chat Window (flex-grow) | Status Panel | Inventory   |
+--------------------------------------------------------
+| Action Input Row (bottom sticky)                      |
+--------------------------------------------------------
+Column 1 — Chat Window
+	•	Vertical list of messages 
+	•	Each message includes: 
+	•	Speaker label (“GM” or Player) 
+	•	Text 
+	•	Auto-scrolls on new messages 
+	•	Handles multi-paragraph narration 
+	•	GM messages appear left; Player messages appear right 
+Column 2 — Status Panel (small, right side)
+Sections:
+Player Panel
+	•	Player name 
+	•	Race/Class icon (text-only for v0) 
+	•	HP bar (text or simple bar) 
+	•	Current status effects (if any) 
+Enemy Panel(s)
+	•	Each enemy in the current encounter 
+	•	Name + HP bar 
+	•	Status effects 
+Objective Box
+	•	List of currently active objectives 
+	•	Each with a checkbox (complete/incomplete) 
+Column 3 — Inventory Panel (optional small)
+	•	Only shows: 
+	•	Emberbrand Cleaver (after boss drop) 
+	•	Timmy’s Sandwich (after rescue) 
+	•	For v0, no interactions needed 
+	•	Simple item list with name + small icon placeholder (optional) 
+Bottom — Action Input Row
+A persistent bar at the bottom with:
+	•	Suggested Action Buttons 
+	•	Icons optional 
+	•	Up to 3 per turn 
+	•	Clicking inserts text OR directly dispatches action 
+	•	Ability Buttons 
+	•	One row (scrollable if needed) 
+	•	Uses the 2 starter abilities from character creation 
+	•	Freeform Text Input 
+	•	Full-width text box 
+	•	Enter key sends the action 
+Gameplay Interaction Flow
+	•	Chat shows GM narration 
+	•	Player chooses: 
+	•	Suggested action 
+	•	Ability 
+	•	Free text 
+	•	On submit: 
+	•	FE constructs GM input JSON 
+	•	Calls AI GM 
+	•	Receives GM JSON response 
+	•	Chat updates 
+	•	Panels update (HP, enemy HP, objectives) 
+	•	Move to next encounter when GM marks encounter complete 
+
+🟦 
+Screen 4: Location Complete Screen
+Layout
+Centered column:
+	•	Large GM summary/narration 
+	•	Loot display 
+	•	Emberbrand Cleaver 
+	•	Timmy’s Sandwich 
+	•	XP and gold numbers 
+	•	Buttons: 
+	•	“Play Again” (Fresh run) 
+	•	“Back to Start” 
+Logic
+	•	Reset state on replay 
+	•	Phase 2 will later allow “Continue Character” 
+
+⭐ 4. 
+CORE COMPONENTS
+ChatWindow
+	•	Displays message list 
+	•	Auto-scrolls 
+	•	Accepts array of {speaker, text} 
+Message
+	•	Individual message component 
+	•	Styling based on speaker 
+AbilityBar
+	•	Renders player abilities as clickable buttons 
+SuggestedActionBar
+	•	Shows suggested actions from GM JSON 
+PlayerPanel
+	•	HP, status, name 
+EnemyPanel
+	•	One panel per enemy 
+ObjectivePanel
+	•	Checkbox display of objectives 
+InventoryPanel
+	•	Minimal item list (text-only) 
+ActionInput
+	•	Input box + submit button 
+
+⭐ 5. 
+STATE + LOGIC NOTES FOR UI
+Cursor needs this spelled out:
+PlayerState
+ lives in context/state
+	•	Updates after every GM response 
+	•	HP, abilities, etc. 
+EncounterState
+	•	Tracks enemies, objectives, completion flag 
+MessageHistory
+	•	Append-only 
+	•	Sent to GM as part of input (if needed) 
+UI Transitions
+	•	On location start → load Encounter 1 
+	•	On encounter completion → advance 
+	•	On boss completion → Location Complete screen 
+
+⭐ 6. 
+STYLING GUIDELINES (simple)
+	•	Use Tailwind for v0 
+	•	Neutral light theme 
+	•	Chat bubbles with minimal borders 
+	•	Panels with light background contrast 
+	•	No animations, shadows optional 
+
+⭐ 7. 
+ASSET REQUIREMENTS
+None required for v0.
+Use text-only or placeholders for:
+	•	Race/class icons 
+	•	Items 
+	•	Enemy “icons” 
+
+⭐ 8. 
+MOBILE?
+Ignore for now — desktop-only layout.
+

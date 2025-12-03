@@ -1,0 +1,242 @@
+📘 NarrativeRPG — Technical Design Document (TDD)
+Version: v0.2
+This document defines the technical foundation of the game:
+	•	Data schemas
+	•	State objects
+	•	Encounter + Location structures
+	•	Co-op future-proofing
+	•	Types/interfaces for Cursor development
+	•	Flow of data between systems
+
+⭐ 
+Core Concepts
+Encounter
+The atomic gameplay unit.
+A single situation—combat, puzzle, social, hazard, or mixed.
+Location
+A container made of 1–3 Encounters.
+Represents a short 5–10 minute session.
+
+⭐ 
+Encounter Schema (v0)
+export type EncounterDifficulty = "easy" | "normal" | "hard" | "boss";
+export type EncounterType = "combat" | "social" | "puzzle" | "hazard" | "mixed";
+
+export interface Encounter {
+  encounter_id: string;
+  title: string;
+  type: EncounterType;
+  difficulty: EncounterDifficulty;
+
+  description: string;  // Initial scene setup
+
+  environment?: {
+    location_hint?: string;
+    lighting?: string;
+    terrain?: string;
+  };
+
+  objectives: Array<{
+    id: string;
+    description: string;
+    required: boolean;
+  }>;
+
+  enemies: Array<{
+    enemy_id: string;
+    name: string;
+    description: string;
+    is_boss?: boolean;
+    stats: {
+      hp: number;
+      pow: number;
+      agi: number;
+      mag: number;
+      ins: number;
+      chr: number;
+    };
+    abilities: string[];
+    behavior: string;
+    drops?: string[];   // item_ids
+  }>;
+
+  npcs: Array<{
+    npc_id: string;
+    name: string;
+    role: string;
+    description: string;
+  }>;
+
+  hazards: string[];
+
+  items: Array<{
+    item_id: string;
+    name: string;
+    type: "weapon" | "gear" | "potion" | "quest" | "misc";
+    description: string;
+    effect?: string;
+    rarity?: "common" | "uncommon" | "rare" | "legendary";
+  }>;
+}
+
+
+⭐ 
+Location Schema (v0)
+Represents a short, self-contained session containing multiple Encounters.
+export type ScalingMode = "fixed" | "level_sync" | "party_average";
+
+export interface Location {
+  location_id: string;
+  name: string;
+  region: string;
+  biome: string;
+  recommended_level: number;
+
+  max_players: number;        // v0: 1 (solo)
+  scaling_mode: ScalingMode;  // v0: "fixed"
+
+  description: string;
+
+  entry_encounter_id: string; // where the run begins
+  boss_encounter_id?: string; // optional reference
+
+  encounters: Encounter[];    // inline for v0 simplicity
+
+  flow: Array<{
+    from: string;            // encounter_id
+    to: string;              // encounter_id
+    condition?: string;      // freeform explanation (optional)
+  }>;
+
+  items: Array<{
+    item_id: string;
+    name: string;
+    type: "weapon" | "gear" | "potion" | "quest" | "misc";
+    description: string;
+    effect?: string;
+    rarity?: "common" | "uncommon" | "rare" | "legendary";
+  }>;
+
+  base_rewards: {
+    xp: number;
+    gold: number;
+    items: string[];         // item_ids from items[]
+  };
+}
+
+
+⭐ 
+PlayerState (v0)
+Represents the dynamic state of the player inside a Location.
+export interface PlayerState {
+  player_id: string;
+  name: string;
+  class_id: string;
+  race_id: string;
+  background_id: string;
+  level: number;
+
+  stats: {
+    hp: number;
+    pow: number;
+    agi: number;
+    mag: number;
+    ins: number;
+    chr: number;
+  };
+
+  abilities: Array<{
+    id: string;
+    name: string;
+    description: string;
+    uses_remaining?: number | null;
+  }>;
+
+  inventory: Array<{
+    item_id: string;
+    name: string;
+    type: string;
+  }>;
+
+  status_effects: string[];
+  flags: { [key: string]: boolean };
+}
+
+
+⭐ 
+EncounterState (v0)
+Tracks ongoing changes within a single Encounter.
+export interface EncounterState {
+  encounter_id: string;
+  has_intro_been_shown: boolean;
+  turn_number: number;
+  encounter_end_reason?: string;
+
+  enemies: Array<{
+    enemy_id: string;
+    current_hp: number;
+    status_effects: string[];
+  }>;
+
+  enemy_state: { [enemyId: string]: 'alive' | 'defeated' | 'tied_up' };
+
+  npcs: Array<{
+    npc_id: string;
+    [key: string]: any;   // e.g. "is_freed": true
+  }>;
+
+  npc_state: { [npcId: string]: 'present' | 'rescued' | 'missing' | 'dead' };
+
+  objectives_state: { [objectiveId: string]: 'active' | 'completed' | 'failed' };
+}
+
+⭐ 
+LocationState (v0)
+Tracks a player’s progress through a Location.
+export interface LocationState {
+  location_id: string;
+  current_encounter_id: string;
+  completed_encounters: string[];
+  rewards_collected: boolean;
+  visited_encounters: string[];
+  location_flags: { [key: string]: boolean };
+}
+
+⭐ 
+System Flow (v0)
+	•	Load Location JSON.
+	•	Set current_encounter = entry_encounter_id.
+	•	Send to AI GM:
+	•	Location
+	•	Current Encounter
+	•	PlayerState
+	•	EncounterState
+	•	Player takes action → GM processes → returns:
+	•	narration
+	•	rolls
+	•	updated states
+	•	Update EncounterState.
+	•	If encounter complete → follow flow to next Encounter.
+	•	If boss encounter complete → mark location complete.
+	•	Grant base_rewards.
+
+⭐ 
+Future-Proofing Notes
+	•	Co-op support baked in early:
+	•	max_players
+	•	scaling_mode
+	•	Loot system can be expanded via more detailed item subtypes.
+	•	Encounter and Enemy definitions can later move to global databases instead of inline.
+	•	Branching Locations can be introduced by expanding the flow section.
+	•	Subclasses, advanced progression, and scaling models maintained outside v0.
+
+⭐ 
+Summary
+The TDD defines:
+	•	Encounter and Location schemas
+	•	Player, Encounter, and Location state structures
+	•	Flow between Encounters
+	•	Co-op future-proof fields
+	•	Full TypeScript-style schemas ready for Cursor
+This is the authoritative technical foundation for prototype development.
+

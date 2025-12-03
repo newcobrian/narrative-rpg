@@ -1,0 +1,19 @@
+[
+  { "race_id": "human", "name": "Human", "description": "Adaptable, balanced." },
+  { "race_id": "elf", "name": "Elf", "description": "Perceptive, magical affinity." },
+  { "race_id": "dwarf", "name": "Dwarf", "description": "Tough, sturdy." },
+  { "race_id": "gnome", "name": "Gnome", "description": "Clever, curious." },
+  { "race_id": "halfling", "name": "Halfling", "description": "Lucky, stealthy." },
+  { "race_id": "orc", "name": "Orc", "description": "Strong, intense." },
+  { "race_id": "goblin", "name": "Goblin", "description": "Sneaky, chaotic." },
+  { "race_id": "dragonborn", "name": "Dragonborn", "description": "Draconic lineage." },
+  { "race_id": "fairy", "name": "Fairy", "description": "Small, magical tricksters." },
+  { "race_id": "dryad", "name": "Dryad", "description": "Nature-bound beings." },
+  { "race_id": "tiefling", "name": "Tiefling", "description": "Infernal heritage, charismatic." },
+  { "race_id": "undead", "name": "Undead", "description": "Spooky vibe, resistant." },
+  { "race_id": "vampire", "name": "Vampire", "description": "Alluring, shadowy." },
+  { "race_id": "golem", "name": "Golem", "description": "Constructed, durable." },
+  { "race_id": "beastfolk", "name": "Beastfolk", "description": "Animal humanoids (catfolk, wolffolk, birdfolk)." },
+  { "race_id": "birdfolk", "name": "Birdfolk", "description": "Avian humanoids." }
+]
+

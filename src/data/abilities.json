@@ -1,0 +1,159 @@
+{
+  "warrior": {
+    "shield_bash": {
+      "id": "shield_bash",
+      "name": "Shield Bash",
+      "description": "Strike with your shield, dealing POW damage with a chance to stun.",
+      "stat_used": "pow"
+    },
+    "whirlwind": {
+      "id": "whirlwind",
+      "name": "Whirlwind",
+      "description": "Spin in a wide arc, hitting all nearby enemies.",
+      "stat_used": "pow"
+    },
+    "battle_roar": {
+      "id": "battle_roar",
+      "name": "Battle Roar",
+      "description": "Rally your strength, gaining a temporary POW boost.",
+      "stat_used": "chr"
+    },
+    "guard_stance": {
+      "id": "guard_stance",
+      "name": "Guard Stance",
+      "description": "Adopt a defensive posture, reducing incoming damage.",
+      "stat_used": "agi"
+    }
+  },
+  "rogue": {
+    "backstab": {
+      "id": "backstab",
+      "name": "Backstab",
+      "description": "Strike from behind for high critical damage.",
+      "stat_used": "agi"
+    },
+    "smoke_bomb": {
+      "id": "smoke_bomb",
+      "name": "Smoke Bomb",
+      "description": "Create a cloud of smoke to escape or gain cover.",
+      "stat_used": "agi"
+    },
+    "quickstep": {
+      "id": "quickstep",
+      "name": "Quickstep",
+      "description": "Dodge the next incoming attack with agile footwork.",
+      "stat_used": "agi"
+    },
+    "throwing_knife": {
+      "id": "throwing_knife",
+      "name": "Throwing Knife",
+      "description": "Hurl a knife at your target from range.",
+      "stat_used": "agi"
+    }
+  },
+  "ranger": {
+    "piercing_arrow": {
+      "id": "piercing_arrow",
+      "name": "Piercing Arrow",
+      "description": "Fire an arrow that ignores enemy defenses.",
+      "stat_used": "agi"
+    },
+    "snare_trap": {
+      "id": "snare_trap",
+      "name": "Snare Trap",
+      "description": "Set a trap that immobilizes enemies.",
+      "stat_used": "ins"
+    },
+    "eagle_eye": {
+      "id": "eagle_eye",
+      "name": "Eagle Eye",
+      "description": "Sharpen your senses, gaining an INS boost for detection.",
+      "stat_used": "ins"
+    },
+    "twin_shot": {
+      "id": "twin_shot",
+      "name": "Twin Shot",
+      "description": "Fire two arrows in quick succession.",
+      "stat_used": "agi"
+    }
+  },
+  "mage": {
+    "arcane_bolt": {
+      "id": "arcane_bolt",
+      "name": "Arcane Bolt",
+      "description": "Launch a bolt of pure magical energy.",
+      "stat_used": "mag"
+    },
+    "frost_snap": {
+      "id": "frost_snap",
+      "name": "Frost Snap",
+      "description": "Unleash a burst of frost that slows enemies.",
+      "stat_used": "mag"
+    },
+    "fire_spark": {
+      "id": "fire_spark",
+      "name": "Fire Spark",
+      "description": "Conjure a spark of flame with a chance to burn.",
+      "stat_used": "mag"
+    },
+    "mage_shield": {
+      "id": "mage_shield",
+      "name": "Mage Shield",
+      "description": "Create a magical barrier to protect yourself.",
+      "stat_used": "mag"
+    }
+  },
+  "witch": {
+    "charm_spark": {
+      "id": "charm_spark",
+      "name": "Charm Spark",
+      "description": "Cast a spell to influence emotions and behavior.",
+      "stat_used": "chr"
+    },
+    "hex_bolt": {
+      "id": "hex_bolt",
+      "name": "Hex Bolt",
+      "description": "Hurl a dark curse that deals damage over time.",
+      "stat_used": "mag"
+    },
+    "potion_toss": {
+      "id": "potion_toss",
+      "name": "Potion Toss",
+      "description": "Throw an improvised potion with unpredictable effects.",
+      "stat_used": "ins"
+    },
+    "glamour_veil": {
+      "id": "glamour_veil",
+      "name": "Glamour Veil",
+      "description": "Create an illusion that confuses and dazzles enemies.",
+      "stat_used": "chr"
+    }
+  },
+  "bard": {
+    "inspiring_tune": {
+      "id": "inspiring_tune",
+      "name": "Inspiring Tune",
+      "description": "Play a melody that boosts ally resolve and morale.",
+      "stat_used": "chr"
+    },
+    "mocking_melody": {
+      "id": "mocking_melody",
+      "name": "Mocking Melody",
+      "description": "Sing a taunting song that lowers enemy morale.",
+      "stat_used": "chr"
+    },
+    "harmony_bolt": {
+      "id": "harmony_bolt",
+      "name": "Harmony Bolt",
+      "description": "Project a bolt of sonic energy at your target.",
+      "stat_used": "mag"
+    },
+    "rhythm_step": {
+      "id": "rhythm_step",
+      "name": "Rhythm Step",
+      "description": "Move with musical rhythm, boosting your dodge ability.",
+      "stat_used": "agi"
+    }
+  }
+}
+

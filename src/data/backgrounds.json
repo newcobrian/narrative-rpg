@@ -1,0 +1,6 @@
+[
+  { "background_id": "wanderer", "name": "Wanderer", "description": "You've traveled far and wide." },
+  { "background_id": "scholar", "name": "Scholar", "description": "You've studied ancient texts and lore." },
+  { "background_id": "adventurer", "name": "Adventurer", "description": "You seek fortune and glory." }
+]
+

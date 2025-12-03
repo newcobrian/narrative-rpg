@@ -1,0 +1,195 @@
+📘 NarrativeRPG — Game Design Document (GDD)
+Version: v0.2
+This document contains all creative and gameplay design elements for NarrativeRPG.
+
+⭐ 
+Core Game Philosophy
+	•	Fun-first, not grind-first. 
+	•	Short-form Encounters (5–10 min) as the atomic gameplay unit. 
+	•	Locations contain 1–3 Encounters. 
+	•	AI-driven narration with guided free-form actions. 
+	•	Player expression through class, race, background, abilities, and cosmetics. 
+	•	Mobile-first design with later desktop support. 
+	•	Replayable, narrative-rich RPG with light humor (6/10). 
+
+⭐ 
+Stats System
+Characters have six core stats:
+	•	POW (Power): Physical strength, melee attacks. 
+	•	AGI (Agility): Dodging, finesse, ranged accuracy. 
+	•	MAG (Magic): Spellcasting potency. 
+	•	INS (Insight): Perception, analysis, psychic damage. 
+	•	CHR (Charm): Persuasion, deception, emotional spells. 
+	•	HP (Health): Vitality and survivability. 
+Stat modifiers affect rolls where relevant.
+
+⭐ 
+Core Rules
+	•	Rolls use a virtual d20. 
+	•	Difficulty Class (DC): 
+	•	8 (easy) 
+	•	12 (normal) 
+	•	15 (hard) 
+	•	18+ (boss/special) 
+	•	Total = d20 + stat_modifier (+ ability bonuses). 
+	•	Success if total ≥ DC. 
+	•	AI GM determines DC based on context. 
+	•	Tone: vivid but quick narration, flexible, slightly witty. 
+
+⭐ 
+Character Creation
+Players choose:
+	•	Race 
+	•	Class 
+	•	Background 
+	•	Two starter abilities (choose 2 of 4 per class) 
+	•	Character appearance + name 
+Races provide flavor; backgrounds provide tiny bonuses.
+
+⭐ 
+Playable Races (v0 Demo Set)
+Includes classic fantasy + expressive anamorphs.
+	•	Human – adaptable, balanced. 
+	•	Elf – perceptive, magical affinity. 
+	•	Dwarf – tough, sturdy. 
+	•	Gnome – clever, curious. 
+	•	Hobbit/Halfling – lucky, stealthy. 
+	•	Orc – strong, intense. 
+	•	Goblin – sneaky, chaotic. 
+	•	Dragonborn – draconic lineage. 
+	•	Fairy – small, magical tricksters. 
+	•	Dryad – nature-bound beings. 
+	•	Tiefling – infernal heritage, charismatic. 
+	•	Undead – spooky vibe, resistant. 
+	•	Vampire – alluring, shadowy. 
+	•	Golem – constructed, durable. 
+	•	Beastfolk (Anthromorphs) – animal humanoids (catfolk, wolffolk, birdfolk). 
+	•	Birdfolk – added specifically for early testing. 
+No stat bonuses yet (v0 keeps simplicity).
+
+⭐ 
+Classes (v0 Demo Set)
+Six classes: 3 martial, 3 caster/support.
+
+⚔️ 
+Warrior (Martial)
+Tanky bruiser focused on melee and durability.
+Starter Abilities (Choose 2 of 4)
+	•	Shield Bash — POW attack + stun chance. 
+	•	Whirlwind — AoE spin. 
+	•	Battle Roar — Temporary POW boost. 
+	•	Guard Stance — Damage reduction. 
+Level 3 Abilities (Choose 1)
+	•	Power Strike — Heavy POW hit. 
+	•	Taunting Shout — Draw enemy aggression. 
+Level 5 Upgrades
+	•	Upgrade Shield Bash → higher stun chance. 
+	•	Iron Resolve — Resist a negative effect. 
+
+🗡 
+Rogue (Martial)
+Stealthy, agile, crit-focused.
+Starter Abilities
+	•	Backstab — High crit from advantage. 
+	•	Smoke Bomb — Escape/cover. 
+	•	Quickstep — Dodge next attack. 
+	•	Throwing Knife — Ranged attack. 
+Level 3
+	•	Poison Strike — Damage-over-time. 
+	•	Shadow Feint — Illusion to mislead. 
+Level 5
+	•	Upgrade Backstab. 
+	•	Silent Step — Temporary stealth. 
+
+🏹 
+Ranger (Martial/Ranged)
+Bow specialist, scouting, nature synergy.
+Starter
+	•	Piercing Arrow — Defense-ignoring shot. 
+	•	Snare Trap — Immobilize. 
+	•	Eagle Eye — INS boost for detection. 
+	•	Twin Shot — Two light arrows. 
+Level 3
+	•	Nature’s Mark — Bonus damage tag. 
+	•	Companion Call — Temporary animal ally. 
+Level 5
+	•	Upgrade Piercing Arrow. 
+	•	Quickdraw — Guaranteed first strike. 
+
+🔮 
+Mage (Caster)
+Pure magic damage, elemental options.
+Starter
+	•	Arcane Bolt — Magic projectile. 
+	•	Frost Snap — Slow effect. 
+	•	Fire Spark — Burn chance. 
+	•	Mage Shield — Barrier. 
+Level 3
+	•	Shock Pulse — Lightning chain. 
+	•	Mind Pierce — Psychic INS damage. 
+Level 5
+	•	Upgrade Arcane Bolt → Arcane Lance. 
+	•	Spell Weave — Reduce next mana cost. 
+
+🧹 
+Witch (Caster/Control)
+Emotion spells, curses, illusions.
+Starter
+	•	Charm Spark — Influence emotions. 
+	•	Hex Bolt — Dark curse damage. 
+	•	Potion Toss — Improvised potion. 
+	•	Glamour Veil — Confusion/dazzle. 
+Level 3
+	•	Fear Bloom — Frighten foes. 
+	•	Heartmelt — CHR persuasion burst. 
+Level 5
+	•	Upgrade Hex Bolt → Hex Blast. 
+	•	Familiar Whisper — Magical helper. 
+
+🎵 
+Bard (Caster/Support)
+Support, buffs, debuffs, sonic magic.
+Starter
+	•	Inspiring Tune — Ally resolve boost. 
+	•	Mocking Melody — Lower morale. 
+	•	Harmony Bolt — Sound projectile. 
+	•	Rhythm Step — Dodge boost. 
+Level 3
+	•	Disruption Chord — Interrupt spellcasting. 
+	•	Ballad of Courage — Party buff. 
+Level 5
+	•	Upgrade Inspiring Tune → Anthem of Valor. 
+	•	Lulling Verse — Sleep attempt. 
+
+⭐ 
+Backgrounds (v0 Demo Set)
+Backgrounds provide flavor + tiny perk + AI hook.
+	•	Alchemist Apprentice — +1 potion/concoction rolls. 
+	•	Noble Outcast — 1 persuasion reroll per Location. 
+	•	Street Urchin — Advantage on stealth once. 
+	•	Scholar — +1 INS. 
+	•	Hunter — +1 vs beasts. 
+	•	Wanderer — Advantage on navigation. 
+
+⭐ 
+Tone & Humor Guidelines
+	•	Light, witty, playful. 
+	•	Humor level: 6/10. 
+	•	Support creativity: guide wild actions rather than block them. 
+	•	Maintain narrative consistency at all times. 
+
+⭐ 
+Summary
+This GDD defines:
+	•	Full demo race list 
+	•	Six classes with ability progression (levels 1, 3, 5) 
+	•	Backgrounds 
+	•	Stats + roll mechanics 
+	•	Character creation structure 
+	•	Tone rules 
+Future additions:
+	•	Subclasses 
+	•	Progression curve (6–20+) 
+	•	Loot system 
+	•	Region/world lore 
+
