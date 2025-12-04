@@ -23,8 +23,8 @@ export default async function handler(req, res) {
       model: "gpt-4.1-mini",
       // System prompt with all of our GM rules
       instructions: getSystemPrompt(),
-      // The structured GMInput we built on the frontend
-      input: gmInput,
+      // Send GMInput as a JSON string
+      input: JSON.stringify(gmInput),
       temperature: 0.2,
     });
 
