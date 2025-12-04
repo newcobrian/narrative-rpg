@@ -8,7 +8,6 @@ export default function StartScreen() {
       <div className="text-center space-y-8">
         <div>
           <h1 className="text-5xl font-pixel text-[#E5E5E5] mb-4">NARRATIVERPG</h1>
-          <p className="text-lg text-[#CFCFCF] font-sans">AI-Powered Fantasy RPG Prototype</p>
         </div>
         
         <div className="space-y-4">
