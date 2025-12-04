@@ -1,0 +1,147 @@
+{
+  "location_id": "murkroot_shaman_cave",
+  "name": "Murkroot Shaman’s Cave",
+  "region": "Bramblebrook Hinterlands",
+  "biome": "cave",
+  "recommended_level": 1,
+  "max_players": 1,
+  "scaling_mode": "fixed",
+  "description": "A damp cave hidden in the hillside, where goblins whisper about a shaman who bargains with strange spirits and makes villagers disappear.",
+  "entry_encounter_id": "murkroot_cave_entrance",
+  "boss_encounter_id": "murkroot_shaman_sanctum",
+  "encounters": [
+    {
+      "encounter_id": "murkroot_cave_entrance",
+      "title": "Mouth of the Murkroot Cave",
+      "type": "exploration",
+      "difficulty": "easy",
+      "description": "You stand at the mouth of a narrow cave. Cool, damp air spills out, carrying the smell of moss and smoke. Faint goblin voices echo from deeper within.",
+      "environment": {
+        "location_hint": "cave entrance",
+        "lighting": "dim natural light",
+        "terrain": "slick stone, scattered rocks"
+      },
+      "objectives": [
+        {
+          "id": "enter_the_cave",
+          "description": "Find a safe way deeper into the cave.",
+          "required": true
+        }
+      ],
+      "enemies": [
+        {
+          "enemy_id": "goblin_scout_1",
+          "name": "Goblin Scout",
+          "description": "A jittery goblin posted near the entrance, trying to look brave.",
+          "stats": { "hp": 6, "pow": 2, "agi": 2, "mag": 0, "ins": 1, "chr": 1 },
+          "abilities": ["Rusty Dagger Jab", "Panic Slash"],
+          "behavior": "Skittish; may flee deeper into the cave if threatened."
+        },
+        {
+          "enemy_id": "goblin_scout_2",
+          "name": "Goblin Lookout",
+          "description": "A goblin perched on a rock, squinting into the twilight.",
+          "stats": { "hp": 5, "pow": 1, "agi": 3, "mag": 0, "ins": 1, "chr": 1 },
+          "abilities": ["Stone Toss", "Alarm Yodel"],
+          "behavior": "Tries to warn the shaman if things go badly."
+        }
+      ],
+      "npcs": [],
+      "hazards": ["loose_rocks", "narrow_ledge"],
+      "items": []
+    },
+    {
+      "encounter_id": "murkroot_shaman_sanctum",
+      "title": "Sanctum of the Murkroot Shaman",
+      "type": "combat",
+      "difficulty": "boss",
+      "description": "You emerge into a wide cavern lit by sickly green candles. Chalk circles and bone charms cover the floor. At the far end, a goblin shaman raises a staff over a bound villager.",
+      "environment": {
+        "location_hint": "underground ritual chamber",
+        "lighting": "flickering green candlelight",
+        "terrain": "uneven stone floor, crude stone altar"
+      },
+      "objectives": [
+        {
+          "id": "stop_the_ritual",
+          "description": "Stop the shaman’s ritual before something terrible happens.",
+          "required": true
+        },
+        {
+          "id": "rescue_villager",
+          "description": "Free the terrified villager from the altar.",
+          "required": false
+        }
+      ],
+      "enemies": [
+        {
+          "enemy_id": "murkroot_shaman",
+          "name": "Murkroot Shaman",
+          "is_boss": true,
+          "description": "A hunched goblin wrapped in stitched hides, clutching a bone staff crowned with a flickering green ember.",
+          "stats": { "hp": 18, "pow": 2, "agi": 2, "mag": 3, "ins": 2, "chr": 2 },
+          "abilities": ["Hex Bolt", "Spirit Lash", "Bone Ward"],
+          "behavior": "Cackling and theatrical; alternates between curses and desperate bargains.",
+          "drops": ["charred_bone_totem"]
+        },
+        {
+          "enemy_id": "goblin_guard_1",
+          "name": "Goblin Boneguard",
+          "description": "A goblin in mismatched bits of bone armor, loyal to the shaman.",
+          "stats": { "hp": 8, "pow": 3, "agi": 1, "mag": 0, "ins": 1, "chr": 1 },
+          "abilities": ["Bone Club Smash", "Shield the Shaman"],
+          "behavior": "Protects the shaman at all costs."
+        },
+        {
+          "enemy_id": "goblin_guard_2",
+          "name": "Goblin Boneguard",
+          "description": "Another bone-clad defender, slightly less sure about this whole ritual thing.",
+          "stats": { "hp": 7, "pow": 2, "agi": 2, "mag": 0, "ins": 1, "chr": 1 },
+          "abilities": ["Reckless Swing", "Desperate Lunge"],
+          "behavior": "Aggressive but distractible."
+        }
+      ],
+      "npcs": [
+        {
+          "npc_id": "bound_villager",
+          "name": "Terrified Villager",
+          "role": "captive",
+          "description": "A villager tied to the stone altar, eyes wide with fear. Smells faintly of bread and onions.",
+          "gifts": ["half_eaten_sandwich"]
+        }
+      ],
+      "hazards": ["glowing_spore_clouds", "crumbling_ceiling"],
+      "items": [
+        {
+          "item_id": "charred_bone_totem",
+          "name": "Charred Bone Totem",
+          "type": "trinket",
+          "rarity": "rare",
+          "description": "A blackened bone charm, still warm to the touch and faintly humming with spirit energy.",
+          "effect": "Once per Location: gain advantage on a single MAG-based check."
+        },
+        {
+          "item_id": "half_eaten_sandwich",
+          "name": "Half-Eaten Sandwich",
+          "type": "consumable",
+          "rarity": "common",
+          "description": "Bread, meat, and something that might be pickle. Comforting, if you don’t think too hard about it.",
+          "effect": "Once per Location: restore a small amount of HP or reduce fear in a tense social moment."
+        }
+      ]
+    }
+  ],
+  "flow": [
+    { "from": "murkroot_cave_entrance", "to": "murkroot_shaman_sanctum", "condition": "After defeating or bypassing the entrance scouts and heading deeper into the cave." },
+    { "from": "murkroot_shaman_sanctum", "to": "end", "condition": "Once the shaman is defeated or driven off and the ritual is stopped." }
+  ],
+  "items": [
+    "charred_bone_totem",
+    "half_eaten_sandwich"
+  ],
+  "base_rewards": {
+    "xp": 140,
+    "gold": 35,
+    "items": ["charred_bone_totem", "half_eaten_sandwich"]
+  }
+}
