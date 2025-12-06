@@ -53,9 +53,13 @@ export function GameProvider({ children }) {
 
   const selectLocation = async (locationId) => {
     try {
-      // Import locations index
-      const locationsIndexModule = await import('../data/locations_index.json');
-      const locationsIndex = locationsIndexModule.default || locationsIndexModule;
+      // Fetch locations index
+      const locationsIndexResponse = await fetch('/data/locations_index.json');
+      if (!locationsIndexResponse.ok) {
+        throw new Error(`Failed to load locations index: ${locationsIndexResponse.status} ${locationsIndexResponse.statusText}`);
+      }
+      const locationsIndex = await locationsIndexResponse.json();
+      
       const locationMetadata = locationsIndex.find(loc => loc.id === locationId);
       
       if (!locationMetadata) {
@@ -70,9 +74,14 @@ export function GameProvider({ children }) {
         return;
       }
 
-      // Dynamically import the location JSON file
-      const locationDataModule = await import(`../data/${locationMetadata.file}`);
-      const locationData = locationDataModule.default || locationDataModule;
+      console.log('[Location] Starting location', locationMetadata.id, 'file:', locationMetadata.file);
+
+      // Fetch the location JSON file
+      const locationDataResponse = await fetch(`/data/${locationMetadata.file}`);
+      if (!locationDataResponse.ok) {
+        throw new Error(`Error loading location "${locationMetadata.id}": ${locationDataResponse.status} ${locationDataResponse.statusText}`);
+      }
+      const locationData = await locationDataResponse.json();
       
       // Load the location using existing loadLocation function
       await loadLocation(locationData);

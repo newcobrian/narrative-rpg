@@ -1,6 +1,29 @@
-import locationsIndex from '../data/locations_index.json';
+import { useState, useEffect } from 'react';
 
 export default function LocationSelectScreen({ onLocationSelected, onBack }) {
+  const [locationsIndex, setLocationsIndex] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadLocationsIndex() {
+      try {
+        const response = await fetch('/data/locations_index.json');
+        if (!response.ok) {
+          throw new Error(`Failed to load locations: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        setLocationsIndex(data);
+      } catch (err) {
+        console.error('Error loading locations index:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadLocationsIndex();
+  }, []);
+
   const handleLocationSelect = (locationId) => {
     if (onLocationSelected) {
       onLocationSelected(locationId);
@@ -12,6 +35,22 @@ export default function LocationSelectScreen({ onLocationSelected, onBack }) {
       onBack();
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#000000] py-8 flex items-center justify-center">
+        <div className="text-[#E5E5E5] font-sans">Loading locations...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#000000] py-8 flex items-center justify-center">
+        <div className="text-[#BF616A] font-sans">Error loading locations: {error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#000000] py-8">
