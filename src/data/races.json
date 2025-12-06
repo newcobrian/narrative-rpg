@@ -1,19 +1,100 @@
-[
-  { "race_id": "human", "name": "Human", "description": "Adaptable, balanced." },
-  { "race_id": "elf", "name": "Elf", "description": "Perceptive, magical affinity." },
-  { "race_id": "dwarf", "name": "Dwarf", "description": "Tough, sturdy." },
-  { "race_id": "gnome", "name": "Gnome", "description": "Clever, curious." },
-  { "race_id": "halfling", "name": "Halfling", "description": "Lucky, stealthy." },
-  { "race_id": "orc", "name": "Orc", "description": "Strong, intense." },
-  { "race_id": "goblin", "name": "Goblin", "description": "Sneaky, chaotic." },
-  { "race_id": "dragonborn", "name": "Dragonborn", "description": "Draconic lineage." },
-  { "race_id": "fairy", "name": "Fairy", "description": "Small, magical tricksters." },
-  { "race_id": "dryad", "name": "Dryad", "description": "Nature-bound beings." },
-  { "race_id": "tiefling", "name": "Tiefling", "description": "Infernal heritage, charismatic." },
-  { "race_id": "undead", "name": "Undead", "description": "Spooky vibe, resistant." },
-  { "race_id": "vampire", "name": "Vampire", "description": "Alluring, shadowy." },
-  { "race_id": "golem", "name": "Golem", "description": "Constructed, durable." },
-  { "race_id": "beastfolk", "name": "Beastfolk", "description": "Animal humanoids (catfolk, wolffolk, birdfolk)." },
-  { "race_id": "birdfolk", "name": "Birdfolk", "description": "Avian humanoids." }
-]
-
+{
+  "races": [
+    {
+      "id": "human",
+      "race_id": "human",
+      "name": "Human",
+      "description": "Versatile and stubbornly resilient, humans show up everywhere there's trouble or opportunity.",
+      "playstyle_hint": "Flexible \"default\" choice that fits any class or build.",
+      "example_names": ["Arin", "Lysa", "Rowan", "Mara"]
+    },
+    {
+      "id": "elf",
+      "race_id": "elf",
+      "name": "Elf",
+      "description": "Graceful and long-lived, elves are keen-eyed wanderers with a deep connection to magic and the wilds.",
+      "playstyle_hint": "Great for agile, perceptive, or magic-leaning builds.",
+      "example_names": ["Thalir", "Elera", "Sylwen", "Kaelis"]
+    },
+    {
+      "id": "dwarf",
+      "race_id": "dwarf",
+      "name": "Dwarf",
+      "description": "Stout, stubborn, and tough as bedrock, dwarves are hardy folk who thrive in the thick of danger.",
+      "playstyle_hint": "Excellent for frontline or tanky characters.",
+      "example_names": ["Borin", "Hilda", "Krag", "Durgra"]
+    },
+    {
+      "id": "halfling",
+      "race_id": "halfling",
+      "name": "Halfling",
+      "description": "Small in stature but big in luck, halflings slip through danger with a smile and a good story.",
+      "playstyle_hint": "Ideal for rogues, ranged, or \"lucky survivor\" types.",
+      "example_names": ["Pip", "Tamsin", "Merri", "Leto"]
+    },
+    {
+      "id": "gnome",
+      "race_id": "gnome",
+      "name": "Gnome",
+      "description": "Curious tinkerers and oddball arcanists, gnomes can't resist poking the strange glowing thing.",
+      "playstyle_hint": "Fits inventive casters, support, and trickster builds.",
+      "example_names": ["Fizzik", "Nela", "Quen", "Brilla"]
+    },
+    {
+      "id": "orc",
+      "race_id": "orc",
+      "name": "Orc",
+      "description": "Fierce and driven, orcs channel raw strength and willpower into whatever path they choose.",
+      "playstyle_hint": "Great for high-POW bruisers or intense support roles.",
+      "example_names": ["Gorak", "Shara", "Mokran", "Vraka"]
+    },
+    {
+      "id": "goblin",
+      "race_id": "goblin",
+      "name": "Goblin",
+      "description": "Scrappy, fast, and a little unhinged, goblins survive on nerve, speed, and questionable ideas.",
+      "playstyle_hint": "Fun for chaotic, agile, or \"gremlin energy\" builds.",
+      "example_names": ["Skrit", "Nob", "Zikka", "Grib"]
+    },
+    {
+      "id": "dragonborn",
+      "race_id": "dragonborn",
+      "name": "Dragonborn",
+      "description": "Scaled warriors with a hint of dragon's fire in their blood and a talent for dramatic entrances.",
+      "playstyle_hint": "Good for flashy frontline or battle-mage characters.",
+      "example_names": ["Rhaz", "Seryn", "Kaelth", "Myrris"]
+    },
+    {
+      "id": "catfolk",
+      "race_id": "catfolk",
+      "name": "Catfolk",
+      "description": "Feline humanoids who move with quiet grace and sharp curiosity.",
+      "playstyle_hint": "Great for rogues, rangers, and agile casters.",
+      "example_names": ["Miri", "Jax", "Sable", "Tavi"]
+    },
+    {
+      "id": "birdfolk",
+      "race_id": "birdfolk",
+      "name": "Birdfolk",
+      "description": "Winged or feathered humanoids with keen eyes and a love of high vantage points.",
+      "playstyle_hint": "Ideal for scouts, archers, and perceptive mystics.",
+      "example_names": ["Koro", "Lyss", "Rai", "Talren"]
+    },
+    {
+      "id": "fae",
+      "race_id": "fae",
+      "name": "Fae",
+      "description": "Otherworldly beings touched by older magic, half in this world and half in another.",
+      "playstyle_hint": "Suits trickster casters, enchanters, and social characters.",
+      "example_names": ["Liriel", "Thistle", "Aeron", "Nyx"]
+    },
+    {
+      "id": "revenant",
+      "race_id": "revenant",
+      "name": "Revenant",
+      "description": "Once dead but called back by purpose, revenants carry a lingering chill and an unfinished story.",
+      "playstyle_hint": "Great for tough, stubborn, or spooky builds (warriors, warlocks, clerics).",
+      "example_names": ["Corin", "Vessa", "Draen", "Morrow"]
+    }
+  ]
+}

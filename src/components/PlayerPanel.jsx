@@ -23,7 +23,7 @@ export default function PlayerPanel({ playerState }) {
           <div className="w-full h-4 border-2 border-[#3A3A3A] relative">
             {/* Lost HP (red) */}
             {lostHpPercentage > 0 && (
-              <div
+          <div
                 className="absolute top-0 right-0 h-full bg-[#BF616A] transition-all"
                 style={{ width: `${Math.max(0, Math.min(100, lostHpPercentage))}%` }}
               />
@@ -31,15 +31,15 @@ export default function PlayerPanel({ playerState }) {
             {/* Remaining HP (green) */}
             <div
               className="absolute top-0 left-0 h-full bg-[#A3BE8C] transition-all"
-              style={{ width: `${Math.max(0, Math.min(100, hpPercentage))}%` }}
-            />
-          </div>
+            style={{ width: `${Math.max(0, Math.min(100, hpPercentage))}%` }}
+          />
         </div>
-        {playerState.status_effects.length > 0 && (
+      </div>
+      {playerState.status_effects.length > 0 && (
           <div className="text-xs text-[#7A7A7A] font-sans">
-            Effects: {playerState.status_effects.join(', ')}
-          </div>
-        )}
+          Effects: {playerState.status_effects.join(', ')}
+        </div>
+      )}
       </div>
     </div>
   );

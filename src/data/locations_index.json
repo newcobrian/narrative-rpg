@@ -1,0 +1,23 @@
+[
+  {
+    "id": "grogmaw_tavern",
+    "name": "Goblin Tavern",
+    "description": "A suspiciously friendly goblin-run tavern where not all patrons leave by the front door.",
+    "recommended_level": 1,
+    "file": "grogmaw_tavern.json"
+  },
+  {
+    "id": "whispering_garden",
+    "name": "Whispering Garden",
+    "description": "An overgrown moonlit garden where pollen, vines, and a floral hive-mind have turned hostile.",
+    "recommended_level": 5,
+    "file": "whispering_garden.json"
+  },
+  {
+    "id": "candlewitch_cottage",
+    "name": "Candlewitch Cottage",
+    "description": "You wake bound to a chair in a too-cozy cottage under the watchful eye of Nana Wick.",
+    "recommended_level": 5,
+    "file": "candlewitch_cottage.json"
+  }
+]

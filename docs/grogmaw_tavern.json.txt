@@ -1,6 +1,6 @@
 {
   "location_id": "grogmaw_tavern",
-  "name": "Grogmaw Tavern",
+  "name": "Goblin Tavern",
   "region": "Bramblebrook Outskirts",
   "biome": "tavern_cave",
   "recommended_level": 1,
@@ -17,7 +17,7 @@
       "type": "social",
       "difficulty": "normal",
 
-      "description": "You push open the door to Grogmaw Tavern. Dim lantern light flickers across overturned chairs, sticky floorboards, and goblins wearing forced smiles. A nervous server keeps spilling ale as they glance toward the back corner. A warped patch of floorboards there looks slightly raised, as if something beneath has shifted over time.",
+      "description": "You push open the door to The Crooked Tavern. Dim lantern light flickers across overturned chairs, sticky floorboards, and goblins wearing forced smiles. A nervous server keeps spilling ale as they glance toward the back corner. A warped patch of floorboards there looks slightly raised, as if something beneath has shifted over time.",
 
       "environment": {
         "location_hint": "smoky tavern interior",

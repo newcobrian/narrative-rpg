@@ -55,11 +55,11 @@ export function mergeEncounterState(prev, updates) {
       const incoming = updates.enemies.find(e => e.enemy_id === enemy.enemy_id);
       return incoming ? { ...enemy, ...incoming } : enemy;
     });
-  }
+      }
 
   if (updates.npc_state) {
     merged.npc_state = { ...prev.npc_state, ...updates.npc_state };
-  }
+      }
 
   if (updates.npcs) {
     merged.npcs = merged.npcs.map(npc => {
@@ -67,7 +67,7 @@ export function mergeEncounterState(prev, updates) {
       return incoming ? { ...npc, ...incoming } : npc;
     });
   }
-
+  
   if (updates.objectives_state) {
     merged.objectives_state = {
       ...prev.objectives_state,
@@ -86,7 +86,7 @@ export function mergeEncounterState(prev, updates) {
   if (updates.encounter_end_reason !== undefined) {
     merged.encounter_end_reason = updates.encounter_end_reason;
   }
-
+  
   return merged;
 }
 

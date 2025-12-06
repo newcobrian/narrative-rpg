@@ -1,6 +1,7 @@
 import { GameProvider, useGame } from './state/gameContext';
 import StartScreen from './screens/StartScreen';
 import CharacterCreationScreen from './screens/CharacterCreationScreen';
+import LocationSelectScreen from './screens/LocationSelectScreen';
 import GameScreen from './screens/GameScreen';
 import CompletionScreen from './screens/CompletionScreen';
 
@@ -9,7 +10,9 @@ function AppContent() {
     currentScreen,
     finalPlayerState,
     finalLocationState,
-    restartGame
+    restartGame,
+    onLocationSelected,
+    onBack
   } = useGame();
 
   switch (currentScreen) {
@@ -17,6 +20,13 @@ function AppContent() {
       return <StartScreen />;
     case 'character':
       return <CharacterCreationScreen />;
+    case 'locationSelect':
+      return (
+        <LocationSelectScreen
+          onLocationSelected={onLocationSelected}
+          onBack={onBack}
+        />
+      );
     case 'game':
       return <GameScreen />;
     case 'completion':

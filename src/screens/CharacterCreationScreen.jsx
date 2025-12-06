@@ -1,25 +1,24 @@
 import { useState } from 'react';
 import { useGame } from '../state/gameContext';
-import classesData from '../data/classes.json';
-import racesData from '../data/races.json';
-import abilitiesData from '../data/abilities.json';
+import classesDataRaw from '../data/classes.json';
+import racesDataRaw from '../data/races.json';
+
+// Extract arrays from the new structure (backward compatible)
+const classesData = classesDataRaw.classes || classesDataRaw;
+const racesData = racesDataRaw.races || racesDataRaw;
 
 export default function CharacterCreationScreen() {
-  const { createCharacter, loadLocation } = useGame();
+  const { createCharacter } = useGame();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     race_id: '',
     class_id: '',
     background_id: 'wanderer', // Default background for v0
-    selectedAbilities: [],
     name: ''
   });
 
-  const selectedClass = classesData.find(c => c.class_id === formData.class_id);
-  const availableAbilities = selectedClass ? selectedClass.starter_abilities : [];
-
   const handleNext = () => {
-    if (step < 4) { // Reduced from 5 to 4 (skipping background step)
+    if (step < 3) {
       setStep(step + 1);
     }
   };
@@ -30,37 +29,20 @@ export default function CharacterCreationScreen() {
     }
   };
 
-  const handleAbilityToggle = (abilityId) => {
-    setFormData(prev => {
-      const current = prev.selectedAbilities;
-      if (current.includes(abilityId)) {
-        return { ...prev, selectedAbilities: current.filter(id => id !== abilityId) };
-      } else if (current.length < 2) {
-        return { ...prev, selectedAbilities: [...current, abilityId] };
-      }
-      return prev;
-    });
-  };
-
   const handleSubmit = async () => {
-    if (!formData.name || !formData.race_id || !formData.class_id || formData.selectedAbilities.length !== 2) {
+    if (!formData.name || !formData.race_id || !formData.class_id) {
       alert('Please complete all fields');
       return;
     }
 
     createCharacter(formData);
-    
-    // Load location data
-    const locationData = await import('../data/grogmaw_tavern.json');
-    loadLocation(locationData.default);
   };
 
   const canProceed = () => {
     switch (step) {
       case 1: return formData.race_id !== '';
       case 2: return formData.class_id !== '';
-      case 3: return formData.selectedAbilities.length === 2;
-      case 4: return formData.name.trim() !== '';
+      case 3: return formData.name.trim() !== '';
       default: return false;
     }
   };
@@ -79,15 +61,15 @@ export default function CharacterCreationScreen() {
                 {racesData.map(race => {
                   const isSelected = formData.race_id === race.race_id;
                   return (
-                    <button
-                      key={race.race_id}
-                      onClick={() => setFormData(prev => ({ ...prev, race_id: race.race_id }))}
+                  <button
+                    key={race.race_id}
+                    onClick={() => setFormData(prev => ({ ...prev, race_id: race.race_id }))}
                       className={`p-4 text-left transition-all cursor-pointer relative ${
                         isSelected
                           ? 'bg-[#2A2A2A] border-2 border-[#8BC6FF] shadow-[0_0_4px_#8BC6FF]'
                           : 'bg-[#1A1A1A] border border-[#5A5A5A] hover:bg-[#2A2A2A] hover:border-[#8BC6FF]'
-                      }`}
-                    >
+                    }`}
+                  >
                       {isSelected && (
                         <div className="absolute top-2 right-2 text-[#8BC6FF] text-[8px] font-pixel uppercase tracking-wider">
                           SELECTED
@@ -99,7 +81,7 @@ export default function CharacterCreationScreen() {
                       <div className={`text-sm font-sans ${isSelected ? 'text-[#CFCFCF]' : 'text-[#CFCFCF] opacity-80'}`}>
                         {race.description}
                       </div>
-                    </button>
+                  </button>
                   );
                 })}
               </div>
@@ -112,17 +94,18 @@ export default function CharacterCreationScreen() {
               <h3 className="text-xl font-pixel text-[#E5E5E5] mb-4 text-sm">CHOOSE YOUR CLASS</h3>
               <div className="space-y-3">
                 {classesData.map(cls => {
-                  const isSelected = formData.class_id === cls.class_id;
+                  const classId = cls.id || cls.class_id;
+                  const isSelected = formData.class_id === classId;
                   return (
-                    <button
-                      key={cls.class_id}
-                      onClick={() => setFormData(prev => ({ ...prev, class_id: cls.class_id, selectedAbilities: [] }))}
+                  <button
+                    key={classId}
+                    onClick={() => setFormData(prev => ({ ...prev, class_id: classId }))}
                       className={`w-full p-4 text-left transition-all cursor-pointer relative ${
                         isSelected
                           ? 'bg-[#2A2A2A] border-2 border-[#8BC6FF] shadow-[0_0_4px_#8BC6FF]'
                           : 'bg-[#1A1A1A] border border-[#5A5A5A] hover:bg-[#2A2A2A] hover:border-[#8BC6FF]'
-                      }`}
-                    >
+                    }`}
+                  >
                       {isSelected && (
                         <div className="absolute top-2 right-2 text-[#8BC6FF] text-[8px] font-pixel uppercase tracking-wider">
                           SELECTED
@@ -134,52 +117,15 @@ export default function CharacterCreationScreen() {
                       <div className={`text-sm font-sans ${isSelected ? 'text-[#CFCFCF]' : 'text-[#CFCFCF] opacity-80'}`}>
                         {cls.description}
                       </div>
-                    </button>
+                  </button>
                   );
                 })}
               </div>
             </div>
           )}
 
-          {/* Step 3: Abilities (was Step 4) */}
+          {/* Step 3: Name */}
           {step === 3 && (
-            <div>
-              <h3 className="text-xl font-pixel text-[#E5E5E5] mb-4 text-sm">CHOOSE 2 STARTER ABILITIES</h3>
-              <p className="text-sm text-[#CFCFCF] mb-4 font-sans">Select 2 of 4 abilities for your {selectedClass?.name}</p>
-              <div className="grid grid-cols-2 gap-3">
-                {availableAbilities.map(ability => {
-                  const isSelected = formData.selectedAbilities.includes(ability.id);
-                  return (
-                    <button
-                      key={ability.id}
-                      onClick={() => handleAbilityToggle(ability.id)}
-                      className={`p-4 text-left transition-all cursor-pointer relative ${
-                        isSelected
-                          ? 'bg-[#2A2A2A] border-2 border-[#8BC6FF] shadow-[0_0_4px_#8BC6FF]'
-                          : 'bg-[#1A1A1A] border border-[#5A5A5A] hover:bg-[#2A2A2A] hover:border-[#8BC6FF]'
-                      }`}
-                    >
-                      {isSelected && (
-                        <div className="absolute top-2 right-2 text-[#8BC6FF] text-[8px] font-pixel uppercase tracking-wider">
-                          SELECTED
-                        </div>
-                      )}
-                      <div className={`font-pixel text-xs flex items-center mb-1 ${isSelected ? 'text-[#8BC6FF] font-semibold' : 'text-[#E5E5E5]'}`}>
-                        {ability.name.toUpperCase()}
-                        {isSelected && <span className="ml-2 text-[#8BC6FF]">✓</span>}
-                      </div>
-                      <div className={`text-sm font-sans ${isSelected ? 'text-[#CFCFCF]' : 'text-[#CFCFCF] opacity-80'}`}>
-                        {ability.description}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Step 4: Name (was Step 5) */}
-          {step === 4 && (
             <div>
               <h3 className="text-xl font-semibold text-[#E5E5E5] mb-4 tracking-widest uppercase">ENTER YOUR CHARACTER NAME</h3>
               <input
@@ -202,7 +148,7 @@ export default function CharacterCreationScreen() {
             >
               BACK
             </button>
-            {step < 4 ? (
+            {step < 3 ? (
               <button
                 onClick={handleNext}
                 disabled={!canProceed()}

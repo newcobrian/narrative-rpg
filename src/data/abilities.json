@@ -1,159 +1,261 @@
 {
-  "warrior": {
-    "shield_bash": {
+  "abilities": [
+    {
       "id": "shield_bash",
       "name": "Shield Bash",
-      "description": "Strike with your shield, dealing POW damage with a chance to stun.",
-      "stat_used": "pow"
+      "type": "active",
+      "description": "A forceful shield strike intended to stagger or push an enemy backward."
     },
-    "whirlwind": {
-      "id": "whirlwind",
-      "name": "Whirlwind",
-      "description": "Spin in a wide arc, hitting all nearby enemies.",
-      "stat_used": "pow"
+    {
+      "id": "whirlwind_strike",
+      "name": "Whirlwind Strike",
+      "type": "active",
+      "description": "Spin with controlled ferocity, striking all enemies within reach."
     },
-    "battle_roar": {
-      "id": "battle_roar",
-      "name": "Battle Roar",
-      "description": "Rally your strength, gaining a temporary POW boost.",
-      "stat_used": "chr"
+    {
+      "id": "taunting_roar",
+      "name": "Taunting Roar",
+      "type": "active",
+      "description": "A booming battle cry that challenges enemies and forces them to focus their attacks on you."
     },
-    "guard_stance": {
-      "id": "guard_stance",
-      "name": "Guard Stance",
-      "description": "Adopt a defensive posture, reducing incoming damage.",
-      "stat_used": "agi"
-    }
-  },
-  "rogue": {
-    "backstab": {
+    {
+      "id": "crushing_leap",
+      "name": "Crushing Leap",
+      "type": "active",
+      "description": "Leap high and crash down on a target, attempting to stagger or pin them."
+    },
+    {
+      "id": "seismic_shockwave",
+      "name": "Seismic Shockwave",
+      "type": "signature",
+      "description": "You slam the ground with overwhelming power, sending a shockwave that ripples through the encounter and knocks enemies off balance."
+    },
+    {
+      "id": "momentum_monster",
+      "name": "Momentum Monster",
+      "type": "passive",
+      "description": "Whenever you succeed on a physical check, your next physical roll gains +3."
+    },
+    {
+      "id": "hammer_of_echoing_thunder",
+      "name": "Hammer of Echoing Thunder",
+      "type": "magic_item",
+      "description": "Your strikes emit thunderous echoes that may stun enemies or rattle the surrounding environment."
+    },
+
+    {
       "id": "backstab",
       "name": "Backstab",
-      "description": "Strike from behind for high critical damage.",
-      "stat_used": "agi"
+      "type": "active",
+      "description": "A precise, deadly strike aimed at a vulnerable point, dealing enhanced damage when unnoticed."
     },
-    "smoke_bomb": {
-      "id": "smoke_bomb",
-      "name": "Smoke Bomb",
-      "description": "Create a cloud of smoke to escape or gain cover.",
-      "stat_used": "agi"
+    {
+      "id": "shadowstep",
+      "name": "Shadowstep",
+      "type": "active",
+      "description": "Slip momentarily into shadow, reappearing behind or beside a target."
     },
-    "quickstep": {
-      "id": "quickstep",
-      "name": "Quickstep",
-      "description": "Dodge the next incoming attack with agile footwork.",
-      "stat_used": "agi"
+    {
+      "id": "caltrop_toss",
+      "name": "Caltrop Toss",
+      "type": "active",
+      "description": "Scatter razor-sharp caltrops to hinder enemy movement and reduce agility."
     },
-    "throwing_knife": {
-      "id": "throwing_knife",
-      "name": "Throwing Knife",
-      "description": "Hurl a knife at your target from range.",
-      "stat_used": "agi"
-    }
-  },
-  "ranger": {
-    "piercing_arrow": {
-      "id": "piercing_arrow",
-      "name": "Piercing Arrow",
-      "description": "Fire an arrow that ignores enemy defenses.",
-      "stat_used": "agi"
+    {
+      "id": "distraction_gambit",
+      "name": "Distraction Gambit",
+      "type": "active",
+      "description": "Use misdirection or charm to create an opening, forcing enemy hesitation."
     },
-    "snare_trap": {
+    {
+      "id": "shadow_carnival",
+      "name": "Shadow Carnival",
+      "type": "signature",
+      "description": "A flurry of illusory clones erupts around you, confusing enemies. On success, the phantoms strike in tandem; on failure, they misfire unpredictably."
+    },
+    {
+      "id": "always_one_step_ahead",
+      "name": "Always One Step Ahead",
+      "type": "passive",
+      "description": "The first attack made against you each encounter automatically misses due to uncanny reflexes."
+    },
+    {
+      "id": "shadowglass_dagger",
+      "name": "Shadowglass Dagger",
+      "type": "magic_item",
+      "description": "A void-forged blade that absorbs surrounding light and leaves ghostly afterimages with each strike."
+    },
+
+    {
+      "id": "twin_arrows",
+      "name": "Twin Arrows",
+      "type": "active",
+      "description": "Loose two arrows at once toward one or two targets."
+    },
+    {
+      "id": "hunters_focus",
+      "name": "Hunter’s Focus",
+      "type": "active",
+      "description": "Sharpen your senses, increasing accuracy and insight for your next action."
+    },
+    {
       "id": "snare_trap",
       "name": "Snare Trap",
-      "description": "Set a trap that immobilizes enemies.",
-      "stat_used": "ins"
+      "type": "active",
+      "description": "Deploy a hidden snare that immobilizes the next enemy to step into it."
     },
-    "eagle_eye": {
-      "id": "eagle_eye",
-      "name": "Eagle Eye",
-      "description": "Sharpen your senses, gaining an INS boost for detection.",
-      "stat_used": "ins"
+    {
+      "id": "hawkeye_shot",
+      "name": "Hawkeye Shot",
+      "type": "active",
+      "description": "Aim with extraordinary precision, striking weak points at long range."
     },
-    "twin_shot": {
-      "id": "twin_shot",
-      "name": "Twin Shot",
-      "description": "Fire two arrows in quick succession.",
-      "stat_used": "agi"
-    }
-  },
-  "mage": {
-    "arcane_bolt": {
-      "id": "arcane_bolt",
-      "name": "Arcane Bolt",
-      "description": "Launch a bolt of pure magical energy.",
-      "stat_used": "mag"
+    {
+      "id": "arrowstorm_cyclone",
+      "name": "Arrowstorm Cyclone",
+      "type": "signature",
+      "description": "Leap and spin in a controlled arc, unleashing a swirling barrage of arrows that ricochet around the environment."
     },
-    "frost_snap": {
-      "id": "frost_snap",
-      "name": "Frost Snap",
-      "description": "Unleash a burst of frost that slows enemies.",
-      "stat_used": "mag"
+    {
+      "id": "hunters_flow_state",
+      "name": "Hunter’s Flow State",
+      "type": "passive",
+      "description": "Success on AGI or INS checks grants a free follow-up attack without consuming a turn."
     },
-    "fire_spark": {
-      "id": "fire_spark",
-      "name": "Fire Spark",
-      "description": "Conjure a spark of flame with a chance to burn.",
-      "stat_used": "mag"
+    {
+      "id": "stormfeather_quiver",
+      "name": "Stormfeather Quiver",
+      "type": "magic_item",
+      "description": "Infuses each arrow with a streak of wind or lightning, allowing slight trajectory bending and improved mobility."
     },
-    "mage_shield": {
-      "id": "mage_shield",
-      "name": "Mage Shield",
-      "description": "Create a magical barrier to protect yourself.",
-      "stat_used": "mag"
-    }
-  },
-  "witch": {
-    "charm_spark": {
-      "id": "charm_spark",
-      "name": "Charm Spark",
-      "description": "Cast a spell to influence emotions and behavior.",
-      "stat_used": "chr"
-    },
-    "hex_bolt": {
-      "id": "hex_bolt",
-      "name": "Hex Bolt",
-      "description": "Hurl a dark curse that deals damage over time.",
-      "stat_used": "mag"
-    },
-    "potion_toss": {
-      "id": "potion_toss",
-      "name": "Potion Toss",
-      "description": "Throw an improvised potion with unpredictable effects.",
-      "stat_used": "ins"
-    },
-    "glamour_veil": {
-      "id": "glamour_veil",
-      "name": "Glamour Veil",
-      "description": "Create an illusion that confuses and dazzles enemies.",
-      "stat_used": "chr"
-    }
-  },
-  "bard": {
-    "inspiring_tune": {
-      "id": "inspiring_tune",
-      "name": "Inspiring Tune",
-      "description": "Play a melody that boosts ally resolve and morale.",
-      "stat_used": "chr"
-    },
-    "mocking_melody": {
-      "id": "mocking_melody",
-      "name": "Mocking Melody",
-      "description": "Sing a taunting song that lowers enemy morale.",
-      "stat_used": "chr"
-    },
-    "harmony_bolt": {
-      "id": "harmony_bolt",
-      "name": "Harmony Bolt",
-      "description": "Project a bolt of sonic energy at your target.",
-      "stat_used": "mag"
-    },
-    "rhythm_step": {
-      "id": "rhythm_step",
-      "name": "Rhythm Step",
-      "description": "Move with musical rhythm, boosting your dodge ability.",
-      "stat_used": "agi"
-    }
-  }
-}
 
+    {
+      "id": "firebolt",
+      "name": "Firebolt",
+      "type": "active",
+      "description": "Hurl a bolt of flame at a target, searing them with magical fire."
+    },
+    {
+      "id": "arcane_shield",
+      "name": "Arcane Shield",
+      "type": "active",
+      "description": "Conjure a shimmering barrier of arcane energy to protect yourself or an ally."
+    },
+    {
+      "id": "frostbind",
+      "name": "Frostbind",
+      "type": "active",
+      "description": "Encase a target’s limbs in frost, slowing their movement."
+    },
+    {
+      "id": "spectral_hand",
+      "name": "Spectral Hand",
+      "type": "active",
+      "description": "A floating ghostly hand manipulates objects from afar."
+    },
+    {
+      "id": "arcane_cataclysm",
+      "name": "Arcane Cataclysm",
+      "type": "signature",
+      "description": "A miniature supernova implodes then explodes outward, bending gravity and throwing enemies off balance."
+    },
+    {
+      "id": "mana_echo",
+      "name": "Mana Echo",
+      "type": "passive",
+      "description": "Once per encounter, your first spell is cast in an empowered form without consuming additional effort."
+    },
+    {
+      "id": "chronoscribed_gloves",
+      "name": "Chrono-Scribed Gloves",
+      "type": "magic_item",
+      "description": "You may rewind your last roll once per encounter, altering fate itself."
+    },
+
+    {
+      "id": "chaos_bolt",
+      "name": "Chaos Bolt",
+      "type": "active",
+      "description": "A wildly unstable bolt of energy that takes on a random elemental form."
+    },
+    {
+      "id": "draconic_shout",
+      "name": "Draconic Shout",
+      "type": "active",
+      "description": "Release a draconic roar that rattles foes and can weaken their resolve."
+    },
+    {
+      "id": "wild_surge",
+      "name": "Wild Surge",
+      "type": "active",
+      "description": "Release unpredictable magic; results range from powerful bursts to unintended transformations."
+    },
+    {
+      "id": "enchant_mind",
+      "name": "Enchant Mind",
+      "type": "active",
+      "description": "Manipulate a weak-willed mind, influencing its next decision."
+    },
+    {
+      "id": "prismatic_overload",
+      "name": "Prismatic Overload",
+      "type": "signature",
+      "description": "Unleash chaotic magic in a blinding spectrum; effects vary dramatically depending on your roll."
+    },
+    {
+      "id": "chaotic_lottery",
+      "name": "Chaotic Lottery",
+      "type": "passive",
+      "description": "At the start of each turn, gain a random +2 bonus to any stat."
+    },
+    {
+      "id": "draconic_soul_lantern",
+      "name": "Draconic Soul Lantern",
+      "type": "magic_item",
+      "description": "Channel draconic essence to unleash a devastating cone of elemental energy once per encounter."
+    },
+
+    {
+      "id": "radiant_strike",
+      "name": "Radiant Strike",
+      "type": "active",
+      "description": "A holy-infused melee strike that burns with radiant energy."
+    },
+    {
+      "id": "healing_word",
+      "name": "Healing Word",
+      "type": "active",
+      "description": "Speak a brief divine incantation that restores an ally’s vitality."
+    },
+    {
+      "id": "divine_barrier",
+      "name": "Divine Barrier",
+      "type": "active",
+      "description": "A shimmering shield of faith protects a target from harm."
+    },
+    {
+      "id": "sanctify",
+      "name": "Sanctify",
+      "type": "active",
+      "description": "Consecrate an area, weakening undead or corrupt enemies."
+    },
+    {
+      "id": "celestial_descent",
+      "name": "Celestial Descent",
+      "type": "signature",
+      "description": "A radiant avatar descends to mirror your movements; your next action is duplicated with divine force."
+    },
+    {
+      "id": "blessing_overflow",
+      "name": "Blessing Overflow",
+      "type": "passive",
+      "description": "Whenever you heal or bless an ally, you gain a small random buff yourself."
+    },
+    {
+      "id": "halo_of_dawnbreaker",
+      "name": "Halo of Dawnbreaker",
+      "type": "magic_item",
+      "description": "When you would fall, you explode in healing light and rise again with renewed strength."
+    }
+  ]
+}

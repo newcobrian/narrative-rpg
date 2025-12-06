@@ -1,213 +1,64 @@
-[
-  {
-    "class_id": "warrior",
-    "name": "Warrior",
-    "description": "Tanky bruiser focused on melee and durability.",
-    "starter_abilities": [
-      {
-        "id": "shield_bash",
-        "name": "Shield Bash",
-        "description": "POW attack + stun chance"
-      },
-      {
-        "id": "whirlwind",
-        "name": "Whirlwind",
-        "description": "AoE spin attack"
-      },
-      {
-        "id": "battle_roar",
-        "name": "Battle Roar",
-        "description": "Temporary POW boost"
-      },
-      {
-        "id": "guard_stance",
-        "name": "Guard Stance",
-        "description": "Damage reduction"
-      }
-    ],
-    "base_stats": {
-      "hp": 12,
-      "pow": 3,
-      "agi": 1,
-      "mag": 0,
-      "ins": 1,
-      "chr": 1
+{
+  "classes": [
+    {
+      "id": "warrior",
+      "name": "Warrior",
+      "description": "A master of raw strength and battlefield momentum.",
+      "starter_abilities": ["shield_bash", "whirlwind_strike"],
+      "mid_tier_abilities": ["taunting_roar", "crushing_leap"],
+      "signature_ability": "seismic_shockwave",
+      "passive_ability": "momentum_monster",
+      "magic_item": "hammer_of_echoing_thunder"
+    },
+    {
+      "id": "rogue",
+      "name": "Rogue",
+      "description": "A swift and cunning combatant who thrives on misdirection.",
+      "starter_abilities": ["backstab", "shadowstep"],
+      "mid_tier_abilities": ["caltrop_toss", "distraction_gambit"],
+      "signature_ability": "shadow_carnival",
+      "passive_ability": "always_one_step_ahead",
+      "magic_item": "shadowglass_dagger"
+    },
+    {
+      "id": "ranger",
+      "name": "Ranger",
+      "description": "A precise hunter whose arrows reshape the battlefield.",
+      "starter_abilities": ["twin_arrows", "hunters_focus"],
+      "mid_tier_abilities": ["snare_trap", "hawkeye_shot"],
+      "signature_ability": "arrowstorm_cyclone",
+      "passive_ability": "hunters_flow_state",
+      "magic_item": "stormfeather_quiver"
+    },
+    {
+      "id": "mage",
+      "name": "Mage",
+      "description": "A disciplined spellcaster channeling raw arcane power.",
+      "starter_abilities": ["firebolt", "arcane_shield"],
+      "mid_tier_abilities": ["frostbind", "spectral_hand"],
+      "signature_ability": "arcane_cataclysm",
+      "passive_ability": "mana_echo",
+      "magic_item": "chronoscribed_gloves"
+    },
+    {
+      "id": "sorcerer",
+      "name": "Sorcerer",
+      "description": "An instinct-driven wielder of chaotic magical force.",
+      "starter_abilities": ["chaos_bolt", "draconic_shout"],
+      "mid_tier_abilities": ["wild_surge", "enchant_mind"],
+      "signature_ability": "prismatic_overload",
+      "passive_ability": "chaotic_lottery",
+      "magic_item": "draconic_soul_lantern"
+    },
+    {
+      "id": "cleric",
+      "name": "Cleric",
+      "description": "A conduit for divine power who protects and uplifts allies.",
+      "starter_abilities": ["radiant_strike", "healing_word"],
+      "mid_tier_abilities": ["divine_barrier", "sanctify"],
+      "signature_ability": "celestial_descent",
+      "passive_ability": "blessing_overflow",
+      "magic_item": "halo_of_dawnbreaker"
     }
-  },
-  {
-    "class_id": "rogue",
-    "name": "Rogue",
-    "description": "Stealthy, agile, crit-focused.",
-    "starter_abilities": [
-      {
-        "id": "backstab",
-        "name": "Backstab",
-        "description": "High crit from advantage"
-      },
-      {
-        "id": "smoke_bomb",
-        "name": "Smoke Bomb",
-        "description": "Escape/cover"
-      },
-      {
-        "id": "quickstep",
-        "name": "Quickstep",
-        "description": "Dodge next attack"
-      },
-      {
-        "id": "throwing_knife",
-        "name": "Throwing Knife",
-        "description": "Ranged attack"
-      }
-    ],
-    "base_stats": {
-      "hp": 8,
-      "pow": 2,
-      "agi": 4,
-      "mag": 0,
-      "ins": 2,
-      "chr": 2
-    }
-  },
-  {
-    "class_id": "ranger",
-    "name": "Ranger",
-    "description": "Bow specialist, scouting, nature synergy.",
-    "starter_abilities": [
-      {
-        "id": "piercing_arrow",
-        "name": "Piercing Arrow",
-        "description": "Defense-ignoring shot"
-      },
-      {
-        "id": "snare_trap",
-        "name": "Snare Trap",
-        "description": "Immobilize enemy"
-      },
-      {
-        "id": "eagle_eye",
-        "name": "Eagle Eye",
-        "description": "INS boost for detection"
-      },
-      {
-        "id": "twin_shot",
-        "name": "Twin Shot",
-        "description": "Two light arrows"
-      }
-    ],
-    "base_stats": {
-      "hp": 10,
-      "pow": 2,
-      "agi": 3,
-      "mag": 0,
-      "ins": 3,
-      "chr": 1
-    }
-  },
-  {
-    "class_id": "mage",
-    "name": "Mage",
-    "description": "Pure magic damage, elemental options.",
-    "starter_abilities": [
-      {
-        "id": "arcane_bolt",
-        "name": "Arcane Bolt",
-        "description": "Magic projectile"
-      },
-      {
-        "id": "frost_snap",
-        "name": "Frost Snap",
-        "description": "Slow effect"
-      },
-      {
-        "id": "fire_spark",
-        "name": "Fire Spark",
-        "description": "Burn chance"
-      },
-      {
-        "id": "mage_shield",
-        "name": "Mage Shield",
-        "description": "Barrier protection"
-      }
-    ],
-    "base_stats": {
-      "hp": 8,
-      "pow": 0,
-      "agi": 1,
-      "mag": 4,
-      "ins": 2,
-      "chr": 1
-    }
-  },
-  {
-    "class_id": "witch",
-    "name": "Witch",
-    "description": "Emotion spells, curses, illusions.",
-    "starter_abilities": [
-      {
-        "id": "charm_spark",
-        "name": "Charm Spark",
-        "description": "Influence emotions"
-      },
-      {
-        "id": "hex_bolt",
-        "name": "Hex Bolt",
-        "description": "Dark curse damage"
-      },
-      {
-        "id": "potion_toss",
-        "name": "Potion Toss",
-        "description": "Improvised potion"
-      },
-      {
-        "id": "glamour_veil",
-        "name": "Glamour Veil",
-        "description": "Confusion/dazzle"
-      }
-    ],
-    "base_stats": {
-      "hp": 8,
-      "pow": 0,
-      "agi": 1,
-      "mag": 3,
-      "ins": 2,
-      "chr": 3
-    }
-  },
-  {
-    "class_id": "bard",
-    "name": "Bard",
-    "description": "Support, buffs, debuffs, sonic magic.",
-    "starter_abilities": [
-      {
-        "id": "inspiring_tune",
-        "name": "Inspiring Tune",
-        "description": "Ally resolve boost"
-      },
-      {
-        "id": "mocking_melody",
-        "name": "Mocking Melody",
-        "description": "Lower enemy morale"
-      },
-      {
-        "id": "harmony_bolt",
-        "name": "Harmony Bolt",
-        "description": "Sound projectile"
-      },
-      {
-        "id": "rhythm_step",
-        "name": "Rhythm Step",
-        "description": "Dodge boost"
-      }
-    ],
-    "base_stats": {
-      "hp": 9,
-      "pow": 1,
-      "agi": 2,
-      "mag": 2,
-      "ins": 2,
-      "chr": 4
-    }
-  }
-]
-
+  ]
+}

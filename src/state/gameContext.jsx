@@ -18,7 +18,7 @@ export function GameProvider({ children }) {
   const createCharacter = (characterData) => {
     const newPlayerState = createPlayerState(characterData);
     setPlayerState(newPlayerState);
-    setCurrentScreen('game');
+    setCurrentScreen('locationSelect');
   };
 
   const completeLocation = (finalPlayer, finalLocation) => {
@@ -48,6 +48,39 @@ export function GameProvider({ children }) {
         diceRolls: null,
         lastPlayerActionText: null
       }]);
+    }
+  };
+
+  const selectLocation = async (locationId) => {
+    try {
+      // Import locations index
+      const locationsIndexModule = await import('../data/locations_index.json');
+      const locationsIndex = locationsIndexModule.default || locationsIndexModule;
+      const locationMetadata = locationsIndex.find(loc => loc.id === locationId);
+      
+      if (!locationMetadata) {
+        console.error(`Location with id "${locationId}" not found in locations index`);
+        // Fallback to first location if available
+        if (locationsIndex && locationsIndex.length > 0) {
+          const fallbackLocation = locationsIndex[0];
+          console.warn(`Falling back to first location: ${fallbackLocation.id}`);
+          await selectLocation(fallbackLocation.id);
+          return;
+        }
+        return;
+      }
+
+      // Dynamically import the location JSON file
+      const locationDataModule = await import(`../data/${locationMetadata.file}`);
+      const locationData = locationDataModule.default || locationDataModule;
+      
+      // Load the location using existing loadLocation function
+      await loadLocation(locationData);
+      
+      // Set screen to game
+      setCurrentScreen('game');
+    } catch (error) {
+      console.error(`Error loading location "${locationId}":`, error);
     }
   };
 
@@ -192,11 +225,14 @@ export function GameProvider({ children }) {
       messageHistory,
       createCharacter,
       loadLocation,
+      selectLocation,
       updateGameState,
       addPlayerMessage,
       resetGame,
       completeLocation,
-      restartGame
+      restartGame,
+      onLocationSelected: selectLocation,
+      onBack: () => setCurrentScreen('character')
     }}>
       {children}
     </GameContext.Provider>

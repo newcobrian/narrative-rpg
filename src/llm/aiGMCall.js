@@ -32,7 +32,7 @@ export function buildGMInput({
   encounterState,
   locationState,
   messageHistory,
-  playerAction
+  playerAction,
 }) {
   const recent_history = trimHistory(messageHistory);
   return {
@@ -42,7 +42,7 @@ export function buildGMInput({
     player_state: playerState,
     encounter_state: encounterState,
     location_state: locationState,
-    location_data: currentEncounter,
+    location_data: location,
     recent_history,
     player_action: buildPlayerAction(playerAction.raw_text, playerAction.meta),
     config: {
