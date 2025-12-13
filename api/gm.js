@@ -1,9 +1,4 @@
-import OpenAI from "openai";
-import { getSystemPrompt } from "../src/llm/prompts.js";
-
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import { callGMWithConfiguredProvider } from "../src/llm/gmRouter.js";
 
 /**
  * Vercel serverless function
@@ -19,30 +14,33 @@ export default async function handler(req, res) {
   try {
     const gmInput = req.body;
 
-    const completion = await client.responses.create({
-      model: "gpt-4.1-mini",
-      // System prompt with all of our GM rules
-      instructions: getSystemPrompt(),
-      // Send GMInput as a JSON string
-      input: JSON.stringify(gmInput),
-      temperature: 0.2,
-    });
-
-    // Responses API: first output, first content block, text field
-    const content = completion.output?.[0]?.content?.[0];
-    const text = content?.text;
-
-    if (!text) {
-      console.error("GM API: no text in response", completion);
-      return res.status(500).json({ error: "GM server error (no text output)" });
+    let text;
+    try {
+      text = await callGMWithConfiguredProvider(gmInput);
+    } catch (providerErr) {
+      console.error("GM provider error:", providerErr);
+      return res.status(500).json({ error: "GM provider error" });
     }
+
+    // --- Robust JSON extraction ---
+    const raw = text.trim();
+
+    // Take everything up to and including the last closing brace.
+    // This safely discards any accidental trailing text like
+    // "What do you do next?"
+    const lastBraceIndex = raw.lastIndexOf("}");
+    const jsonText =
+      lastBraceIndex !== -1 ? raw.slice(0, lastBraceIndex + 1) : raw;
 
     let gmOutput;
     try {
-      gmOutput = JSON.parse(text);
-    } catch (e) {
-      console.error("GM API: failed to parse JSON from text:", text);
-      throw e;
+      gmOutput = JSON.parse(jsonText);
+    } catch (parseErr) {
+      console.error("GM API: failed to parse JSON from text:", raw);
+      console.error("JSON fragment that was parsed:", jsonText);
+      return res
+        .status(500)
+        .json({ error: "GM server error: invalid JSON from model" });
     }
 
     return res.status(200).json(gmOutput);

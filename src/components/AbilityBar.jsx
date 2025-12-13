@@ -48,19 +48,19 @@ export default function AbilityBar({ abilities, onAbilityClick }) {
       <div className="text-xs text-[#E5E5E5] font-sans tracking-wider uppercase">
         ABILITIES
       </div>
-      <div className="flex gap-2 overflow-x-auto pb-2">
+    <div className="flex gap-2 overflow-x-auto pb-2">
         {abilities.map(ability => {
           const manaCost = getManaCost(ability);
           return (
             <div key={ability.id} className="relative">
-              <button
-                onClick={() => onAbilityClick(ability)}
+        <button
+            onClick={() => onAbilityClick(ability)}
                 onMouseEnter={(e) => handleMouseEnter(ability, e)}
                 onMouseLeave={handleMouseLeave}
-                className="px-3 py-2 bg-[#444444] text-[#FFFFFF] border-2 border-[#5A5A5A] hover:bg-[#555555] hover:scale-105 active:scale-95 active:translate-y-[1px] transition-all whitespace-nowrap text-xs font-bold tracking-wide uppercase cursor-pointer font-pixel shadow-inner"
-              >
-                {ability.name}
-              </button>
+            className="px-3 py-2 bg-[#444444] text-[#FFFFFF] border-2 border-[#5A5A5A] hover:bg-[#555555] hover:scale-105 active:scale-95 active:translate-y-[1px] transition-all whitespace-nowrap text-xs font-bold tracking-wide uppercase cursor-pointer font-pixel shadow-inner"
+        >
+          {ability.name}
+        </button>
               
               {hoveredAbility?.id === ability.id && (
                 <div

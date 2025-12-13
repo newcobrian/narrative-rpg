@@ -1,41 +1,41 @@
 {
   "location_id": "candlewitch_cottage",
   "name": "Candlewitch Cottage",
-  "region": "Old Forest Edge",
-  "biome": "enchanted_cottage",
+  "region": "Ashen Woods",
+  "biome": "witch_cottage",
   "recommended_level": 5,
   "max_players": 1,
   "scaling_mode": "fixed",
-  "description": "A crooked little cottage tucked at the edge of the old forest, its chimney sighing lazy curls of smoke into the evening air. From the outside it looks inviting—soft light in the windows, the glow of a steady hearth—yet something about it feels like a story parents tell children with a warning at the end.",
-  "entry_encounter_id": "candlewitch_cottage_main",
-  "boss_encounter_id": "candlewitch_cottage_main",
+  "description": "A small cottage hidden in the Ashen Woods. The interior is cluttered with jars, herbs, and tools. At first glance it looks welcoming, but several details suggest the resident is not harmless.",
+  "entry_encounter_id": "candlewitch_main_room",
+  "boss_encounter_id": "candlewitch_main_room",
+  "intro_brief": {
+    "title": "Nana Wick’s Hospitality",
+    "narrative": "You wake up tied to a chair in a cottage that smells faintly of sugar, herbs, and bad decisions. Nana Wick greets you like an overdue guest — warm smile, sharp eyes, and absolutely no explanation.\n\nYou don’t know how long you’ve been here, but you’re certain of two things:\n1. Nana Wick is in control.\n2. Staying much longer is a terrible idea.\n\nYour objective is to free yourself and escape the cottage. You can bargain, lie, charm, sneak, or make a mess — just be careful. Nana Wick has done this before, and she’s very curious to see how you’ll try."
+  },
   "encounters": [
     {
-      "encounter_id": "candlewitch_cottage_main",
-      "title": "Nana Wick’s Cozy Trap",
+      "encounter_id": "candlewitch_main_room",
+      "title": "Nana Wick’s Hospitality",
       "type": "social",
-      "difficulty": "boss",
-      "description": "You wake to the crackle of a hearth and the smell of honeyed tea. Your wrists and ankles are bound to a sturdy wooden chair with soft, worn rope etched faintly with glowing runes. Shelves of jars, bundles of herbs, and old books line the walls of the snug cottage. At the stove, a small, round woman with silver-streaked hair—Nana Wick—stirs a pot and hums a lullaby just off-key. She glances back with a kindly smile that doesn’t quite reach her eyes. ‘There you are, little wanderer,’ she croons. ‘The forest almost kept you. Good thing I found you first.’",
+      "difficulty": "normal",
+      "description": "The player wakes bound to a wooden chair in the center of the cottage. A cauldron simmers nearby. Shelves are crowded with jars, tools, and dried plants. Nana Wick watches the player calmly. An enchanted broom rests against a wall.",
       "environment": {
-        "location_hint": "cozy, cluttered witch’s cottage interior",
-        "lighting": "warm hearthlight and soft lantern glow",
-        "terrain": "tight, cluttered room with low beams, shelves, and a central hearth"
+        "location_hint": "indoor cottage room",
+        "lighting": "warm candlelight",
+        "terrain": "wooden floor with narrow walkways between shelves; central hearth area",
+        "ambience": "quiet room sounds: bubbling cauldron, soft house creaks, occasional broom shifts"
       },
       "objectives": [
         {
-          "id": "escape_cottage",
-          "description": "Escape Nana Wick’s bindings and leave the cottage.",
+          "id": "escape_bonds",
+          "description": "Free yourself from the chair or loosen the restraints.",
           "required": true
         },
         {
-          "id": "uncover_truth",
-          "description": "Discover Nana Wick’s true intentions and the nature of her ‘guests.’",
-          "required": false
-        },
-        {
-          "id": "change_nana_wicks_fate",
-          "description": "Resolve things with Nana Wick by calming, convincing, or defeating her.",
-          "required": false
+          "id": "leave_cottage",
+          "description": "Exit the cottage safely without being stopped by Nana Wick.",
+          "required": true
         }
       ],
       "enemies": [
@@ -43,81 +43,46 @@
           "enemy_id": "nana_wick",
           "name": "Nana Wick",
           "is_boss": true,
-          "description": "A plump, grandmotherly witch in a soot-dusted shawl, with kind eyes that go glassy when she talks about keeping you ‘safe’ forever. The hearthfire seems to lean toward her when she speaks, and the cottage creaks in time with her moods.",
-          "stats": {
-            "hp": 38,
-            "pow": 2,
-            "agi": 1,
-            "mag": 4,
-            "ins": 3,
-            "chr": 3
-          },
-          "abilities": [
-            "Hearthfire Lash",
-            "Binding Ribbons",
-            "Sleepy Lullaby",
-            "Animated Crockery"
-          ],
-          "behavior": "Begins gentle and disarming, trying to comfort and soothe the player into compliance. If she feels threatened or betrayed, the hearth roars, crockery flies from shelves, and glowing runes flare to tighten bindings. At low health, her confidence cracks, revealing loneliness and fear—allowing a chance to spare or redeem her instead of striking the final blow.",
-          "drops": [
-            "nana_wicks_hearthcharm",
-            "emberbroom_bristle"
-          ]
+          "description": "An elderly cottage witch with candlewax-stained clothing. Calm demeanor, watchful eyes, and subtle magical presence.",
+          "stats": { "hp": 22, "pow": 1, "agi": 1, "mag": 4, "ins": 3, "chr": 4 },
+          "abilities": ["Binding Candleflame", "Sugared Words", "Ashen Hex"],
+          "behavior": "Starts friendly and composed. Deflects questions, monitors the player. Escalates to magical restraint or confrontation if threatened, if the player tries to escape too openly, or if objects are disturbed."
         }
       ],
       "npcs": [
         {
-          "npc_id": "whisklet_broom",
-          "name": "Whisklet",
-          "role": "enchanted_helper",
-          "description": "A shabby, enchanted broom propped in the corner near the hearth. Its bristles twitch when Nana isn’t looking, and it occasionally shuffles an inch or two on its own. It seems tired of sweeping and even more tired of being here.",
-          "gifts": [
-            "emberbroom_bristle"
-          ]
+          "npc_id": "enchanted_broom",
+          "name": "Brusque the Broom",
+          "role": "reluctant_helper",
+          "description": "A self-moving broom with limited awareness. Its bristles twitch when Nana isn’t watching.",
+          "notes": "Can assist indirectly if persuaded or prompted. Capable of loosening rope fibers, moving objects, or causing small distractions. Generally cautious and somewhat grumpy."
         }
       ],
-      "hazards": [
-        "binding_runes",
-        "sleepy_herbal_steam",
-        "flying_crockery"
-      ],
+      "hazards": ["tight_bonds", "crowded_shelves", "unsteady_candles", "hot_cauldron"],
       "items": [
         {
-          "item_id": "nana_wicks_hearthcharm",
-          "name": "Nana Wick’s Hearthcharm",
-          "type": "relic",
+          "item_id": "witchlight_candle",
+          "name": "Witchlight Candle",
+          "type": "consumable",
           "rarity": "rare",
-          "description": "A small copper charm shaped like a tiny cottage, faintly warm to the touch. The inside smells like smoke and spiced tea.",
-          "effect": "Once per Location: you may reroll a failed INS or CHR check related to comfort, fear, or emotional persuasion, keeping the better result."
-        },
-        {
-          "item_id": "emberbroom_bristle",
-          "name": "Emberbroom Bristle",
-          "type": "trinket",
-          "rarity": "uncommon",
-          "description": "A single bristle from Whisklet, still faintly smudged with soot. It flickers warmly when danger stirs nearby.",
-          "effect": "Once per encounter: gain a small bonus on a check to break free, dodge a hazard, or avoid being restrained by mundane or magical bindings."
+          "description": "A small candle with an unusual flame that reacts to illusions and secrets.",
+          "effect": "Once per location, it highlights a hidden detail, faint illusion, or misleading object. Also grants a strong narrative edge on INS or CHR-based attempts to detect deception."
         }
-      ]
+      ],
+      "gm_notes": "This encounter is primarily social and escape-focused. Nana Wick’s initial behavior is calm and polite. Players may attempt to loosen their ropes, distract Nana, negotiate, lie, or involve the broom. The scene can be resolved without combat if the player is subtle. If the player becomes aggressive or reckless, transition to magical conflict. Suggested actions should stay high-level: test the ropes, distract Nana, study the shelves, whisper to the broom, look for tools, etc."
     }
   ],
   "flow": [
     {
-      "from": "candlewitch_cottage_main",
+      "from": "candlewitch_main_room",
       "to": "end",
-      "condition": "Once the player escapes the bindings and leaves the cottage, or resolves things with Nana Wick by defeating or calming her."
+      "condition": "Player escapes the cottage through trickery, stealth, persuasion, or direct confrontation."
     }
   ],
-  "items": [
-    "nana_wicks_hearthcharm",
-    "emberbroom_bristle"
-  ],
+  "items": ["witchlight_candle"],
   "base_rewards": {
-    "xp": 200,
-    "gold": 60,
-    "items": [
-      "nana_wicks_hearthcharm",
-      "emberbroom_bristle"
-    ]
+    "xp": 160,
+    "gold": 50,
+    "items": ["witchlight_candle"]
   }
 }

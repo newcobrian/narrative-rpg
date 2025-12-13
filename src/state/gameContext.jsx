@@ -40,14 +40,6 @@ export function GameProvider({ children }) {
     if (currentEncounter) {
       const newEncounterState = initializeEncounterState(currentEncounter);
       setEncounterState(newEncounterState);
-      
-      // Add initial encounter description to message history
-      setMessageHistory([{
-        speaker: 'GM',
-        text: currentEncounter.description,
-        diceRolls: null,
-        lastPlayerActionText: null
-      }]);
     }
   };
 
@@ -203,10 +195,17 @@ export function GameProvider({ children }) {
     }
   };
 
-  const addPlayerMessage = (text) => {
+  const addPlayerMessage = (text, meta = {}) => {
+    // Skip adding synthetic system_init messages to the chat UI
+    if (meta?.system_init) {
+      return;
+    }
+    
     setMessageHistory(prev => [...prev, {
       speaker: 'Player',
-      text
+      text,
+      diceRolls: null,
+      lastPlayerActionText: null
     }]);
   };
 
@@ -219,6 +218,16 @@ export function GameProvider({ children }) {
     setMessageHistory([]);
     setFinalPlayerState(null);
     setFinalLocationState(null);
+  };
+
+  const markBriefAsShown = () => {
+    setLocationState(prev => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        has_brief_been_shown: true
+      };
+    });
   };
 
   return (
@@ -240,6 +249,7 @@ export function GameProvider({ children }) {
       resetGame,
       completeLocation,
       restartGame,
+      markBriefAsShown,
       onLocationSelected: selectLocation,
       onBack: () => setCurrentScreen('character')
     }}>

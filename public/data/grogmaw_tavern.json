@@ -1,163 +1,127 @@
 {
-  "location_id": "grogmaw_tavern",
-  "name": "Grogmaw Tavern",
-  "region": "Bramblebrook Outskirts",
-  "biome": "tavern_cave",
-  "recommended_level": 1,
+  "location_id": "the_orcish_tavern",
+  "name": "The Orcish",
+  "region": "Borderlands",
+  "biome": "tavern",
+  "recommended_level": 2,
   "max_players": 1,
   "scaling_mode": "fixed",
-  "description": "A suspiciously welcoming goblin-run tavern on the edge of Bramblebrook. Travelers come here for cheap ale and loud songs—some never return.",
-  "entry_encounter_id": "grogmaw_tavern_floor",
-  "boss_encounter_id": "grogmaw_boss_grimble",
+
+  "description": "A rough tavern frequented by orcs, mercenaries, and anyone with poor judgment. Violence here is common, but rarely subtle.",
+
+  "entry_encounter_id": "grog_the_big_main_room",
+  "boss_encounter_id": "grog_the_big_main_room",
+
+  "intro_brief": {
+    "title": "Rescue at The Orcish",
+    "narrative": "You were hired to track down a kidnapped maiden who vanished along the trade road. Your trail ends here, at The Orcish — a brutal tavern known to be controlled by Grog the Big, a feared orc warlord. The maiden is inside, alive but restrained. Grog is here as well, surrounded by muscle. To succeed, you’ll need to deal with Grog and get her out."
+  },
 
   "encounters": [
     {
-      "encounter_id": "grogmaw_tavern_floor",
-      "title": "Welcome to Grogmaw Tavern",
-      "type": "social",
+      "encounter_id": "grog_the_big_main_room",
+      "title": "Grog the Big",
+      "type": "mixed",
       "difficulty": "normal",
 
-      "description": "You push open the door to Grogmaw Tavern. Dim lantern light flickers across overturned chairs, sticky floorboards, and goblins wearing forced smiles. A nervous server keeps spilling ale as they glance toward the back corner. A warped patch of floorboards there looks slightly raised, as if something beneath has shifted over time.",
+      "description": "The tavern’s main room is crowded and tense. A large central table dominates the space, surrounded by scarred orcs and wary patrons. Behind the bar, an orc bartender watches everything closely. Near Grog’s table, a young woman is bound and seated under guard.",
 
       "environment": {
-        "location_hint": "smoky tavern interior",
-        "lighting": "dim",
-        "terrain": "crowded tables, sticky floorboards, warped corner plank"
+        "location_hint": "orc-controlled tavern interior",
+        "lighting": "dim lanterns and hearth fire",
+        "terrain": "crowded tables, benches, bar counter, narrow walking paths",
+        "ambience": "low orcish chatter, clinking mugs, occasional laughter that stops too abruptly"
       },
 
       "objectives": [
         {
-          "id": "find_cellar_access",
-          "description": "Discover and access the hidden way into the cellar.",
+          "id": "defeat_grog",
+          "description": "Defeat or neutralize Grog the Big.",
+          "required": true
+        },
+        {
+          "id": "free_maiden",
+          "description": "Free the captive maiden.",
           "required": true
         }
       ],
 
       "enemies": [
         {
-          "enemy_id": "goblin_brawler_1",
-          "name": "Goblin Brawler",
-          "description": "A stocky goblin clutching a cracked tankard, clearly ready for trouble.",
-          "stats": { "hp": 7, "pow": 2, "agi": 2, "mag": 0, "ins": 1, "chr": 1 },
-          "abilities": ["Wild Swing", "Tankard Smash"],
-          "behavior": "Aggressive if provoked."
+          "enemy_id": "grog_the_big",
+          "name": "Grog the Big",
+          "is_boss": true,
+          "description": "A massive orc warlord seated at the central table. Broad-shouldered, scarred, and completely at ease. He carries himself like a man who expects trouble and welcomes it.",
+          "stats": { "hp": 28, "pow": 4, "agi": 1, "mag": 0, "ins": 2, "chr": 2 },
+          "abilities": [
+            "Crushing Blow",
+            "Intimidating Presence",
+            "Backhand Strike"
+          ],
+          "behavior": "Starts relaxed and mocking. Escalates quickly if challenged, threatened, or if the maiden is approached. Will fight openly and brutally once engaged."
         },
         {
-          "enemy_id": "goblin_card_shark",
-          "name": "Goblin Card Shark",
-          "description": "A smug goblin with a deck of marked cards and an even more marked attitude.",
-          "stats": { "hp": 6, "pow": 1, "agi": 3, "mag": 0, "ins": 2, "chr": 2 },
-          "abilities": ["Cheap Shot", "Card Flick"],
-          "behavior": "Misdirection and trickery."
-        },
-        {
-          "enemy_id": "goblin_nervous_server",
-          "name": "Nervous Server",
-          "description": "A jittery goblin juggling too many mugs, continually glancing toward the back corner.",
-          "stats": { "hp": 5, "pow": 1, "agi": 2, "mag": 0, "ins": 1, "chr": 2 },
-          "abilities": ["Spilled Ale Slip"],
-          "behavior": "Avoids combat; may reveal hints if interacted with."
+          "enemy_id": "grog_lieutenant",
+          "name": "Orc Lieutenant",
+          "is_boss": false,
+          "description": "A thick-necked orc seated beside Grog, watching the room with practiced suspicion.",
+          "stats": { "hp": 14, "pow": 3, "agi": 1, "mag": 0, "ins": 1, "chr": 1 },
+          "abilities": [
+            "Shield Bash"
+          ],
+          "behavior": "Intervenes immediately if violence breaks out or if the player approaches the maiden."
         }
       ],
 
       "npcs": [
         {
-          "npc_id": "goblin_bard_corner",
-          "name": "Skrikk the Bard",
-          "role": "background_flavor",
-          "description": "A goblin badly strumming a crooked lute, mumbling cryptic lines about 'the big fellow below' without offering details."
+          "npc_id": "orc_bartender",
+          "name": "Orc Bartender",
+          "role": "hostile_observer",
+          "description": "A broad orc behind the bar, pretending to clean mugs while tracking every movement in the room.",
+          "notes": "Will alert Grog or join the fight if combat erupts. May be distracted, intimidated, or manipulated."
+        },
+        {
+          "npc_id": "captive_maiden",
+          "name": "Captured Maiden",
+          "role": "captive",
+          "description": "A frightened young woman bound to a chair near Grog’s table. Alert, shaken, and watching for an opening.",
+          "notes": "Can be freed quietly or during combat. Will not attempt escape without player action."
         }
       ],
 
       "hazards": [
-        "spilled_ale_puddles",
-        "rickety_trapdoor_hidden"
+        "crowded_tables",
+        "narrow_walkways",
+        "breakable_furniture"
       ],
-
-      "items": []
-    },
-
-    {
-      "encounter_id": "grogmaw_boss_grimble",
-      "title": "Grimble Gutsplitter, Master of Grogmaw",
-      "type": "combat",
-      "difficulty": "boss",
-
-      "description": "You descend into an old underground brewery. Flickering torchlight dances across massive kegs and damp stone walls. At the far end stands Grimble Gutsplitter, polishing a glowing ember-forged cleaver with a practiced grin. He greets you with a warm, predatory smile—far too friendly to be trusted. Somewhere among the crates, something shifts—someone might be hiding.",
-
-      "environment": {
-        "location_hint": "underground brewery",
-        "lighting": "flickering",
-        "terrain": "open floor, broken kegs, stacked crates"
-      },
-
-      "objectives": [
-        {
-          "id": "defeat_grimble",
-          "description": "Defeat Grimble Gutsplitter.",
-          "required": true
-        }
-      ],
-
-      "enemies": [
-        {
-          "enemy_id": "grimble_gutsplitter",
-          "name": "Grimble Gutsplitter",
-          "is_boss": true,
-          "description": "The goblin tavern master whose hospitality masks his dark dealings.",
-          "stats": { "hp": 20, "pow": 3, "agi": 2, "mag": 2, "ins": 2, "chr": 3 },
-          "abilities": ["Mug Toss", "Ale Flamebreath", "High-Stakes Bluff"],
-          "behavior": "Feigns friendliness before attacking; theatrical and unpredictable.",
-          "drops": ["emberbrand_cleaver"]
-        }
-      ],
-
-      "npcs": [
-        {
-          "npc_id": "sweet_timmy_bard",
-          "name": "Sweet Timmy \"Two-Strings\" Barleymane",
-          "role": "rescued_bard",
-          "description": "Revealed only after Grimble is defeated. Timmy emerges from behind stacked crates, dazed, grateful, and clutching a half-eaten sandwich.",
-          "gifts": ["timmys_half_eaten_sandwich"]
-        }
-      ],
-
-      "hazards": ["ale_slick_puddles"],
 
       "items": [
         {
-          "item_id": "emberbrand_cleaver",
-          "name": "Emberbrand Cleaver",
+          "item_id": "barroom_knife",
+          "name": "Barroom Knife",
           "type": "weapon",
-          "rarity": "rare",
-          "description": "A goblin-forged cleaver glowing with emberlight.",
-          "effect": "Once per Location, ignite to deal bonus fire damage."
-        },
-        {
-          "item_id": "timmys_half_eaten_sandwich",
-          "name": "Timmy’s Half-Eaten Sandwich",
-          "type": "potion",
-          "rarity": "uncommon",
-          "description": "A suspiciously comforting sandwich. Might heal or boost charm or insight.",
-          "effect": "Once per Location: small heal or temporary CHR/INS boost."
+          "rarity": "common",
+          "description": "A heavy, chipped knife left behind by a previous patron.",
+          "effect": "Improvised light weapon. Can be grabbed during the encounter."
         }
-      ]
+      ],
+
+      "gm_notes": "This encounter supports multiple approaches: social manipulation, intimidation, distraction, or direct combat. Grog should feel dangerous but beatable. The maiden is visible from the start to keep stakes clear. Combat will likely draw in both orcs. The bartender should feel like a wildcard who can tip the balance."
     }
   ],
 
   "flow": [
-    { "from": "grogmaw_tavern_floor", "to": "grogmaw_boss_grimble", "condition": "After discovering the hidden cellar access." },
-    { "from": "grogmaw_boss_grimble", "to": "end", "condition": "Once Grimble is defeated." }
-  ],
-
-  "items": [
-    "emberbrand_cleaver",
-    "timmys_half_eaten_sandwich"
+    {
+      "from": "grog_the_big_main_room",
+      "to": "end",
+      "condition": "Grog is defeated or neutralized and the maiden is freed."
+    }
   ],
 
   "base_rewards": {
-    "xp": 120,
-    "gold": 40,
-    "items": ["emberbrand_cleaver", "timmys_half_eaten_sandwich"]
+    "xp": 180,
+    "gold": 60,
+    "items": ["a_bottle_of_golden_ale"]
   }
 }

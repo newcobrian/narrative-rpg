@@ -3,7 +3,7 @@
     "id": "grogmaw_tavern",
     "name": "Goblin Tavern",
     "description": "A suspiciously friendly goblin-run tavern where not all patrons leave by the front door.",
-    "recommended_level": 1,
+    "recommended_level": 5,
     "file": "grogmaw_tavern.json"
   },
   {

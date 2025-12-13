@@ -10,7 +10,8 @@ export function initializeLocationState(location) {
     completed_encounters: [],
     rewards_collected: false,
     visited_encounters: [location.entry_encounter_id],
-    location_flags: {}
+    location_flags: {},
+    has_brief_been_shown: false
   };
 }
 

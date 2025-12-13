@@ -1,133 +1,106 @@
 {
   "location_id": "whispering_garden",
   "name": "Whispering Garden",
-  "region": "Moonlit Outskirts",
+  "region": "Moonshade Vale",
   "biome": "overgrown_garden",
   "recommended_level": 5,
   "max_players": 1,
   "scaling_mode": "fixed",
-  "description": "An overgrown garden sealed behind an ivy-choked gate. Moonlight filters through drifting pollen, and the wind carries soft, wordless whispers. Beneath the tangled roots, something old, patient, and strangely protective seems to be watching.",
-  "entry_encounter_id": "whispering_garden_gate",
-  "boss_encounter_id": "whispering_garden_heart",
+  "description": "An overgrown garden overtaken by thick vines, drifting pollen, and unusual plant behavior.",
+  "entry_encounter_id": "garden_outer_path",
+  "boss_encounter_id": "thornmother_heartbloom",
+
+  "intro_brief": {
+    "title": "The Whispering Garden",
+    "narrative": "You were sent to investigate a once-famous garden that fed half the region — a place known for impossible blooms and gentle caretakers. No shipments have arrived in weeks. Travelers report drifting pollen, tangled paths, and people who wander in… and don’t wander out.\n\nAt the heart of the garden, something has gone wrong. The plants aren’t just overgrown — they’re organized. Watchful. Protective in a way that feels learned.\n\nYour goal is to reach the source of the disturbance and quiet the Thornmother, whether by force, cleverness, or calm intervention. Until that happens, the garden will keep tightening its grip."
+  },
+
   "encounters": [
     {
-      "encounter_id": "whispering_garden_gate",
-      "title": "Gate of Pollen and Thorns",
-      "type": "exploration",
+      "encounter_id": "garden_outer_path",
+      "title": "Outer Garden Approach",
+      "type": "environmental",
       "difficulty": "normal",
-      "description": "You stand before a wrought-iron gate strangled by ivy and thorny roses. Beyond the bars, a moonlit garden glows softly with drifting pollen, paths half-swallowed by creeping vines and wild blooms. The whispers on the wind grow a little louder, brushing the edge of your thoughts like someone trying to be heard from very far away.",
+      "description": "You enter a dense garden path covered in vines and drifting pollen. Movement is partially obstructed, and signs of plant activity appear throughout the area.",
       "environment": {
-        "location_hint": "overgrown garden entrance",
-        "lighting": "cool moonlight with soft bioluminescent glow from some plants",
-        "terrain": "cobbled path choked by roots, ivy-wrapped gate, dense undergrowth"
+        "lighting": "filtered moonlight",
+        "terrain": "overgrown pathways, roots, tangled vines",
+        "ambience": "distant creaking branches, drifting pollen, quiet rustling"
       },
       "objectives": [
         {
-          "id": "open_garden_gate",
-          "description": "Find a way to slip past or unravel the ivy-choked gate.",
+          "id": "reach_inner_garden",
+          "description": "Navigate through the obstructed pathways to reach the inner garden.",
           "required": true
         }
       ],
       "enemies": [],
       "npcs": [],
       "hazards": [
-        "sleepy_pollen_clouds",
-        "strangle_vines"
+        "restrictive_vines",
+        "pollen_haze"
       ],
-      "items": []
+      "items": [],
+      "gm_notes": "An introductory navigation encounter. The player may clear vines, avoid pollen, or use abilities to traverse the path. No combat is required."
     },
     {
-      "encounter_id": "whispering_garden_heart",
-      "title": "Heart of the Whispering Garden",
-      "type": "combat",
-      "difficulty": "boss",
-      "description": "Deeper inside the garden, the paths narrow into a circular glade. Vines coil along carved stone, and a mass of roots and blossoms rises from the center like an altar made of living wood. The whispers you heard at the gate swell into a layered voice—gentle, ancient, and on the verge of losing control.",
+      "encounter_id": "thornmother_heartbloom",
+      "title": "Heart of the Garden",
+      "type": "boss",
+      "difficulty": "hard",
+      "description": "The inner garden forms a circular clearing dominated by an oversized flowering growth at its center. Vines shift with coordinated movement indicative of a central plant intelligence.",
       "environment": {
-        "location_hint": "inner garden glade",
-        "lighting": "pale moonlight, pulsing glow from flowers and roots",
-        "terrain": "circular stone platform wrapped in roots, shifting vines at the edges"
+        "lighting": "moonlit clearing",
+        "terrain": "root-latticed ground, moving vines, large central bloom",
+        "ambience": "steady pulse from the central plant mass, rustling foliage"
       },
       "objectives": [
         {
-          "id": "quiet_the_garden",
-          "description": "Calm, purify, or defeat the garden’s awakened heart before it loses control completely.",
+          "id": "quiet_the_bloom",
+          "description": "Neutralize or pacify the central plant entity.",
           "required": true
         }
       ],
       "enemies": [
         {
-          "enemy_id": "thornmother_core",
+          "enemy_id": "thornmother",
           "name": "Thornmother",
           "is_boss": true,
-          "description": "A towering tangle of roots, blossoms, and bark shaped loosely like a woman’s upper body rising from the earth. Petals drift from her shoulders like a cloak, and her many-layered voice wavers between protective warmth and wild, choking panic.",
-          "stats": {
-            "hp": 45,
-            "pow": 2,
-            "agi": 2,
-            "mag": 4,
-            "ins": 4,
-            "chr": 3
-          },
+          "description": "A large plant-like entity controlling the garden’s growth and defensive behavior.",
+          "stats": { "hp": 40, "pow": 3, "agi": 1, "mag": 4, "ins": 2, "chr": 1 },
           "abilities": [
-            "Pollen Veil",
-            "Strangle Vines",
-            "Bloom Burst",
-            "Rootbound Grasp"
+            "Vine Lash",
+            "Pollen Surge",
+            "Heartbloom Pulse"
           ],
-          "behavior": "Opens by testing the intruder with pollen and grasping vines, more like a warning than a killing blow. As the battle continues, she grows more frantic and destructive, torn between protecting the garden and lashing out. If the player uses empathy, purification, or clever tactics, she may be calmed instead of destroyed.",
-          "drops": [
-            "thornmother_rosebrand",
-            "petal_ward_charm"
-          ]
+          "behavior": "Begins passively, becoming increasingly defensive as the player interferes with the bloom or approaches the center."
         }
       ],
       "npcs": [],
       "hazards": [
-        "pollen_choke_zones",
-        "grasping_vine_rings"
+        "constricting_vines",
+        "pollen_bursts",
+        "unstable_root_platforms"
       ],
-      "items": [
-        {
-          "item_id": "thornmother_rosebrand",
-          "name": "Rosebrand Blade",
-          "type": "weapon",
-          "rarity": "rare",
-          "description": "A slender blade grown from living wood and thorns, its edge lined with crystalline petals that never wilt.",
-          "effect": "Once per encounter: on a successful attack, you may choose to either deal extra damage or entangle a target in harmless vines that hinder their next action."
-        },
-        {
-          "item_id": "petal_ward_charm",
-          "name": "Petal Ward Charm",
-          "type": "trinket",
-          "rarity": "uncommon",
-          "description": "A tiny glass vial of preserved petals that glow faintly when danger stirs.",
-          "effect": "Once per Location: gain a small bonus on a saving throw or skill check to resist poison, charm, or environmental hazards like pollen or choking vines."
-        }
-      ]
+      "items": [],
+      "gm_notes": "This is a single-phase boss encounter. The plant entity does not speak or reason but reacts dynamically to player actions. The player can physically damage the bloom, use abilities to disrupt its coordination, or find creative environmental solutions."
     }
   ],
   "flow": [
     {
-      "from": "whispering_garden_gate",
-      "to": "whispering_garden_heart",
-      "condition": "After the player opens, slips past, or otherwise bypasses the garden gate."
+      "from": "garden_outer_path",
+      "to": "thornmother_heartbloom",
+      "condition": "Upon reaching the inner clearing."
     },
     {
-      "from": "whispering_garden_heart",
+      "from": "thornmother_heartbloom",
       "to": "end",
-      "condition": "Once the garden’s heart is calmed, purified, or Thornmother is defeated."
+      "condition": "Once the central plant entity is neutralized."
     }
   ],
-  "items": [
-    "thornmother_rosebrand",
-    "petal_ward_charm"
-  ],
   "base_rewards": {
-    "xp": 220,
-    "gold": 70,
-    "items": [
-      "thornmother_rosebrand",
-      "petal_ward_charm"
-    ]
+    "xp": 240,
+    "gold": 80,
+    "items": []
   }
 }
