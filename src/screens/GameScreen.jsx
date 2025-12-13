@@ -25,6 +25,8 @@ export default function GameScreen() {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [suggestedActions, setSuggestedActions] = useState([]);
+  const [isStatusDrawerOpen, setIsStatusDrawerOpen] = useState(false);
+  const [isAbilitiesExpanded, setIsAbilitiesExpanded] = useState(false);
 
   const currentEncounter = location && locationState 
     ? getCurrentEncounter(location, locationState)
@@ -125,6 +127,10 @@ export default function GameScreen() {
     markBriefAsShown();
   };
 
+  const handleCloseStatusDrawer = () => {
+    setIsStatusDrawerOpen(false);
+  };
+
   return (
     <div className="h-screen flex flex-col bg-[#000000]">
       {/* Encounter Brief Modal */}
@@ -150,15 +156,56 @@ export default function GameScreen() {
           </div>
         </div>
       )}
+
+      {/* Status Button - Mobile Only */}
+      <div className="md:hidden fixed top-4 right-4 z-40">
+        <button
+          onClick={() => setIsStatusDrawerOpen(true)}
+          className="px-4 py-2 bg-[#0A0A0A] border-2 border-[#3A3A3A] text-[#E5E5E5] font-sans uppercase font-semibold text-sm"
+        >
+          Status
+        </button>
+      </div>
+
+      {/* Status Drawer - Mobile Only */}
+      {isStatusDrawerOpen && (
+        <div className="md:hidden fixed inset-0 z-50">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black bg-opacity-60"
+            onClick={handleCloseStatusDrawer}
+          />
+          {/* Drawer */}
+          <div className="absolute right-0 top-0 bottom-0 w-80 bg-[#000000] border-l-2 border-[#3A3A3A] overflow-y-auto">
+            <div className="p-4 space-y-4">
+              {/* Close button */}
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-lg font-pixel uppercase text-[#8BC6FF]">Status</h3>
+                <button
+                  onClick={handleCloseStatusDrawer}
+                  className="px-3 py-1 bg-[#3A3A3A] text-[#E5E5E5] font-sans text-sm uppercase"
+                >
+                  Close
+                </button>
+              </div>
+              {/* Status Panels */}
+              <PlayerPanel playerState={playerState} />
+              <EnemyPanel encounter={currentEncounter} encounterState={encounterState} />
+              <InventoryPanel inventory={playerState.inventory} />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Content Area */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Chat Window - Left Column */}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        {/* Chat Window - Full width on mobile, flex-1 on desktop */}
         <div className="flex-1 flex flex-col min-w-0">
           <ChatWindow messages={messageHistory} />
         </div>
 
-        {/* Status Panels - Right Column */}
-        <div className="w-64 flex flex-col gap-4 p-4 overflow-y-auto bg-[#000000]">
+        {/* Status Panels - Right Column - Desktop Only */}
+        <div className="hidden md:flex w-64 flex-col gap-4 p-4 overflow-y-auto bg-[#000000]">
           <PlayerPanel playerState={playerState} />
           <EnemyPanel encounter={currentEncounter} encounterState={encounterState} />
           {/* ObjectivePanel hidden for NES theme */}
@@ -170,10 +217,35 @@ export default function GameScreen() {
       {/* Action Input Area - Bottom */}
       <div className="border-t-2 border-[#3A3A3A] bg-[#0A0A0A] p-4 space-y-2">
         <SuggestedActions actions={suggestedActions} onActionClick={(action) => handleAction(action, { suggested_action_id: action })} />
-        <AbilityBar 
-          abilities={playerState.abilities} 
-          onAbilityClick={(ability) => handleAction(`Use ${ability.name}`, { ability_id: ability.id })}
-        />
+        
+        {/* Abilities - Desktop: always visible, Mobile: collapsible */}
+        {/* Mobile: Toggle button */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsAbilitiesExpanded(!isAbilitiesExpanded)}
+            className="w-full px-4 py-2 bg-[#3A3A3A] hover:bg-[#4A4A4A] text-[#E5E5E5] font-sans border-2 border-[#3A3A3A] uppercase font-semibold text-sm transition-colors flex items-center justify-between"
+          >
+            <span>Abilities</span>
+            <span className="text-xs">{isAbilitiesExpanded ? '▼' : '▶'}</span>
+          </button>
+        </div>
+        {/* Abilities content - visible on desktop, conditionally on mobile */}
+        {isAbilitiesExpanded && (
+          <div className="md:hidden mt-2">
+            <AbilityBar 
+              abilities={playerState.abilities} 
+              onAbilityClick={(ability) => handleAction(`Use ${ability.name}`, { ability_id: ability.id })}
+            />
+          </div>
+        )}
+        {/* Desktop: always show */}
+        <div className="hidden md:block">
+          <AbilityBar 
+            abilities={playerState.abilities} 
+            onAbilityClick={(ability) => handleAction(`Use ${ability.name}`, { ability_id: ability.id })}
+          />
+        </div>
+
         <ActionInput onSubmit={handleAction} disabled={isProcessing} />
         {isProcessing && (
           <p className="text-sm text-[#E5E5E5] text-center font-sans">Processing...</p>

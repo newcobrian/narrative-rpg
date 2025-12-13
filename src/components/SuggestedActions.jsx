@@ -11,7 +11,7 @@ export default function SuggestedActions({ actions, onActionClick }) {
         <button
           key={idx}
           onClick={() => onActionClick(action)}
-            className="px-3 py-2 bg-transparent text-[#E5E5E5] opacity-80 border border-[#666666] hover:opacity-100 hover:shadow-[0_0_4px_rgba(255,255,255,0.3)] active:opacity-80 transition-all whitespace-nowrap text-xs font-semibold tracking-wide uppercase cursor-pointer"
+            className="px-4 py-2.5 md:px-3 md:py-2 bg-transparent text-[#E5E5E5] opacity-80 border border-[#666666] hover:opacity-100 hover:shadow-[0_0_4px_rgba(255,255,255,0.3)] active:opacity-80 transition-all whitespace-nowrap text-xs font-semibold tracking-wide uppercase cursor-pointer touch-manipulation"
         >
           {action}
         </button>
