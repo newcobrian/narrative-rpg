@@ -198,9 +198,9 @@ export default function GameScreen() {
       )}
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
         {/* Chat Window - Full width on mobile, flex-1 on desktop */}
-        <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex-1 flex flex-col min-w-0 min-h-0">
           <ChatWindow messages={messageHistory} />
         </div>
 

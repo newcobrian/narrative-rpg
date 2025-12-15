@@ -9,7 +9,13 @@ export default function ChatWindow({ messages }) {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto bg-[#0A0A0A] border-2 border-[#3A3A3A] p-4 space-y-4">
+    <div 
+      className="flex-1 overflow-y-auto bg-[#0A0A0A] border-2 border-[#3A3A3A] p-4 space-y-4"
+      style={{ 
+        WebkitOverflowScrolling: 'touch',
+        touchAction: 'pan-y'
+      }}
+    >
       {messages.map((msg, idx) => (
         <Message 
           key={idx} 
